@@ -6,7 +6,6 @@ module Postini
   #
   # TODO: Expand documentation
   class User
-    include Postini::Endpoint
     
     class << self
       
@@ -14,6 +13,7 @@ module Postini
       def find( address )
         
       end
+      
     end
     
     

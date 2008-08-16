@@ -11,4 +11,20 @@ describe "Postini master module" do
     Postini.system_number = 200
     Postini.system_number.should be(200)
   end
+  
+  it "must allow for setting a username" do
+    Postini.username = 'administrator@jumboinc.com'
+    Postini.username.should eql('administrator@jumboinc.com')
+  end
+  
+  it "must allow for setting a password" do
+    Postini.password = 'secret'
+    Postini.password.should eql('secret')
+  end
+  
+  it "must allow for setting a XAuth string" do
+    Postini.xauth = 'format_unknown_to_author'
+    Postini.xauth.should eql('format_unknown_to_author')
+  end
+  
 end

@@ -5,7 +5,7 @@ describe Postini::User do
     @user = Postini::User.new
   end
 
-  it "should desc" do
+  it "should be tested" do
     violated "Test me"
   end
 end
