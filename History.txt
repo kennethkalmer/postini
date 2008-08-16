@@ -1,3 +1,4 @@
-== 0.0.1 2008-08-11
+== 0.0.1 Work in progress
 
 * Initial release
+  * Support for the Postini Endpoint Resolver API

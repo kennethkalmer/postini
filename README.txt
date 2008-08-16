@@ -1,4 +1,4 @@
-= postini4r
+= postini Gem
 
 * http://postini4r.rubyforge.org/
 
@@ -27,7 +27,7 @@ Rubyisms.
 
 == INSTALL:
 
-* sudo gem install soap4r
+* sudo gem install postini
 
 == TRADEMARKS:
 
@@ -40,8 +40,7 @@ All other trademarks are the property of their respective holders.
 
 (The MIT License)
 
-Copyright (c) 2008 Clear Planet Information Solutions (Pty) Ltd
-Copyright (c) 2008 ISP in a Box CC
+Copyright (c) 2008 Clear Planet Information Solutions (Pty) Ltd & ISP in a Box CC
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
