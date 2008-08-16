@@ -1,24 +1,26 @@
-h1. postini4r
+h1. postini Gem
+h2. Part of the postini4r project
 
+The postini4r project is a collection of sub-projects that aim to implement a broad range of Postini-related tools.
 
 h2. What
 
-postini4r is a Ruby wrapper library for the "Postini":http://www.postini.com/ SOAP API (Early Access Program).
+The postini gem is a Ruby wrapper library for the "Postini":http://www.postini.com/ SOAP API (Early Access Program).
 
-postini4r aims to be fully compliant with the Postini API, starting off with what I need first, and then expanding to eventually cover all the available commands in the Batch Command Reference.
+The postini gem aims to be fully compliant with the Postini API, starting off with what I need first, and then expanding to eventually cover all the available commands in the Batch Command Reference.
 
 h2. Requirements
 
-* postini4r requires that you gain access to the Postini Early Access Program and an API key. You need to contact your Postini Service Provider (or Postini directly if you deal with them).
+* The postini gem requires that you gain access to the Postini Early Access Program and an API key. You need to contact your Postini Service Provider (or Postini directly if you deal with them).
 * soap4r
 
 h2. Installing
 
-<pre syntax="ruby">sudo gem install postini4r</pre>
+<pre syntax="ruby">sudo gem install postini</pre>
 
 h2. Demonstration of usage
 
-TODO - Comin soon, refer to the current specs for some samples
+TODO - Coming soon, refer to the current specs for some samples
 
 h2. Forum
 
@@ -30,20 +32,16 @@ h2. How to submit patches
 
 Read the "8 steps for fixing other people's code":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/ and for section "8b: Submit patch to Google Groups":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups, use the Google Group above.
 
-You can fetch the source from either:
+You can fetch the source from:
 
-* rubyforge: "http://rubyforge.org/scm/?group_id=6826":http://rubyforge.org/scm/?group_id=6826
+* github: "http://github.com/kennethkalmer/postini4r-postini/tree/master":http://github.com/kennethkalmer/postini4r-postini/tree/master
 
-<pre>git clone git://rubyforge.org/postini4r.git</pre>
-
-* github: "http://github.com/kennethkalmer/postini4r/tree/master":http://github.com/kennethkalmer/postini4r/tree/master
-
-<pre>git clone git://github.com/kennethkalmer/postini4r.git</pre>
+<pre>git clone git://github.com/kennethkalmer/postini4r-postini.git</pre>
 
 
 h3. Build and test instructions
 
-<pre>cd postini4r
+<pre>cd postini4r-postini
 rake spec
 rake install_gem</pre>
 
