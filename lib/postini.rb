@@ -5,6 +5,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 gem 'soap4r'
 require 'postini/user'
 require 'postini/domain'
+require 'postini/api/endpointresolver/EndpointResolverDriver'
 
 # This module just provides access to configuration details used by the rest of
 # the gem.
@@ -78,6 +79,21 @@ module Postini
       )
       response = remote.getServiceEndpoint( request )
       response.endpointURI
+    end
+  end
+  
+  def self.auth( service = :automated_batch, username = nil, password = nil, xauth = nil )
+    username ||= self.username
+    password ||= self.password
+    if password.nil?
+      xauth ||= self.xauth
+    end
+    
+    case service
+    when :automated_batch
+      API::AutomatedBatch::AuthElem.new(
+        api_key, username, password, xauth
+      )
     end
   end
 end

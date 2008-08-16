@@ -1,0 +1,1721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Originating Build y6_14_9c0, y6_14_9c0, Thu May 22 11:20:45 PDT 2008-->
+
+<wsdl:definitions
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xmime="http://www.w3.org/2004/11/xmlmime"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:tns="http://postini.com/PSTN/SOAPAPI/v2/automatedbatch"
+   targetNamespace="http://postini.com/PSTN/SOAPAPI/v2/automatedbatch"
+   name="AutomatedBatch"
+>
+
+<wsdl:types>
+    <schema
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://postini.com/PSTN/SOAPAPI/v2/automatedbatch"
+    > 
+
+<xsd:complexType name="AdminBlockException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="AuthenticationException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="BatchException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="InternalException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="InvalidValueException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="MalformedKeyException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="MissingElementException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="NoSuchKeyException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="StatusException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="UnknownInternalException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="addalias">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="userAddressOrId" type="xsd:string" />
+       <xsd:element name="aliasAddress" type="xsd:string" />
+       <xsd:element name="confirm" minOccurs="0" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="addaliasResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="adddomain">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="orgNameOrId" type="xsd:string" />
+       <xsd:element name="args" minOccurs="0" type="tns:adddomainargs" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="adddomainResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="adddomainargs">
+   <xsd:all>
+       <xsd:element name="domain" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="addorg">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="orgName" type="xsd:string" />
+       <xsd:element name="args" minOccurs="0" type="tns:addorgargs" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="addorgResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="addorgargs">
+   <xsd:all>
+       <xsd:element name="parent" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="adduser">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="userAddress" type="xsd:string" />
+       <xsd:element name="args" minOccurs="0" type="tns:adduserargs" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="adduserResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="adduserargs">
+   <xsd:all>
+       <xsd:element name="org" minOccurs="0" type="xsd:string" />
+       <xsd:element name="welcome" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="authElem">
+   <xsd:all>
+       <xsd:element name="apiKey" type="xsd:string" />
+       <xsd:element name="email" type="xsd:string" />
+       <xsd:element name="pword" minOccurs="0" type="xsd:string" />
+       <xsd:element name="xauth" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+
+<xsd:complexType name="checkauth">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="checkauthResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+
+
+<xsd:complexType name="deletealias">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="aliasAddress" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="deletealiasResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="deletedomain">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="domainNameOrId" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="deletedomainResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="deleteorg">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="orgNameOrId" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="deleteorgResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="deleteuser">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="userAddressOrId" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="deleteuserResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displaydomain">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="domainNameOrId" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displaydomainResponse">
+   <xsd:sequence>
+       <xsd:element name="domainRecord" type="tns:domainRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displayorg">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="orgNameOrId" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displayorgResponse">
+   <xsd:sequence>
+       <xsd:element name="orgRecord" type="tns:orgRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displayspool">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="emailOrgNameOrId" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displayspoolResponse">
+   <xsd:sequence>
+       <xsd:element name="spoolRecord" type="tns:spoolRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displayuser">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="userAddressOrId" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="displayuserResponse">
+   <xsd:sequence>
+       <xsd:element name="userRecord" type="tns:userRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="domainRecord">
+   <xsd:all>
+       <xsd:element name="alias" minOccurs="0" type="xsd:string" />
+       <xsd:element name="aliasedfrom" minOccurs="0" type="xsd:string" />
+       <xsd:element name="aliasedto" minOccurs="0" type="xsd:string" />
+       <xsd:element name="domainid" minOccurs="0" type="xsd:string" />
+       <xsd:element name="domainname" minOccurs="0" type="xsd:string" />
+       <xsd:element name="neworg" minOccurs="0" type="xsd:string" />
+       <xsd:element name="org" minOccurs="0" type="xsd:string" />
+       <xsd:element name="substrip" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="getorgreport">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="orgNameOrId" type="xsd:string" />
+       <xsd:element name="args" type="tns:getorgreportargs" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="getorgreportResponse">
+   <xsd:sequence>
+       <xsd:element name="report" minOccurs="0" maxOccurs="unbounded" type="tns:orgReportRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="getorgreportargs">
+   <xsd:all>
+       <xsd:element name="date" type="xsd:string" />
+       <xsd:element name="report" type="xsd:string" />
+       <xsd:element name="top" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+
+<xsd:complexType name="listdomains">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="queryString" type="xsd:string" />
+       <xsd:element name="queryParams" type="tns:listdomainsqueryParams" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="listdomainsResponse">
+   <xsd:sequence>
+       <xsd:element name="domain" minOccurs="0" maxOccurs="unbounded" type="tns:domainRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="listdomainsqueryParams">
+   <xsd:all>
+       <xsd:element name="aliases" minOccurs="0" type="xsd:string" />
+       <xsd:element name="childorgs" minOccurs="0" type="xsd:string" />
+       <xsd:element name="end" minOccurs="0" type="xsd:string" />
+       <xsd:element name="fields" minOccurs="0" type="xsd:string" />
+       <xsd:element name="orgtagqs" minOccurs="0" type="xsd:string" />
+       <xsd:element name="primaryqs" minOccurs="0" type="xsd:string" />
+       <xsd:element name="sort" minOccurs="0" type="xsd:string" />
+       <xsd:element name="start" minOccurs="0" type="xsd:string" />
+       <xsd:element name="targetOrg" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="listorgs">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="queryString" type="xsd:string" />
+       <xsd:element name="queryParams" type="tns:listorgsqueryParams" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="listorgsResponse">
+   <xsd:sequence>
+       <xsd:element name="org" minOccurs="0" maxOccurs="unbounded" type="tns:orgRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="listorgsqueryParams">
+   <xsd:all>
+       <xsd:element name="childorgs" minOccurs="0" type="xsd:string" />
+       <xsd:element name="end" minOccurs="0" type="xsd:string" />
+       <xsd:element name="fields" minOccurs="0" type="xsd:string" />
+       <xsd:element name="orgtag" minOccurs="0" type="xsd:string" />
+       <xsd:element name="sort" minOccurs="0" type="xsd:string" />
+       <xsd:element name="start" minOccurs="0" type="xsd:string" />
+       <xsd:element name="targetOrg" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="listusers">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="queryString" type="xsd:string" />
+       <xsd:element name="queryParams" minOccurs="0" type="tns:listusersqueryParams" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="listusersResponse">
+   <xsd:sequence>
+       <xsd:element name="user" minOccurs="0" maxOccurs="unbounded" type="tns:userRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="listusersqueryParams">
+   <xsd:all>
+       <xsd:element name="aliases" minOccurs="0" type="xsd:string" />
+       <xsd:element name="childorgs" minOccurs="0" type="xsd:string" />
+       <xsd:element name="end" minOccurs="0" type="xsd:string" />
+       <xsd:element name="fields" minOccurs="0" type="xsd:string" />
+       <xsd:element name="orgtagqs" minOccurs="0" type="xsd:string" />
+       <xsd:element name="primaryqs" minOccurs="0" type="xsd:string" />
+       <xsd:element name="sort" minOccurs="0" type="xsd:string" />
+       <xsd:element name="start" minOccurs="0" type="xsd:string" />
+       <xsd:element name="targetOrg" minOccurs="0" type="xsd:string" />
+       <xsd:element name="type_of_user" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="modifydomain">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="domainNameOrId" type="xsd:string" />
+       <xsd:element name="domainModifications" type="tns:domainRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="modifydomainResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="modifyorg">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="orgNameOrId" type="xsd:string" />
+       <xsd:element name="orgModifications" type="tns:orgRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="modifyorgResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="modifyuser">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="userAddressOrId" type="xsd:string" />
+       <xsd:element name="userModifications" type="tns:userRecord" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="modifyuserResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="orgRecord">
+   <xsd:all>
+       <xsd:element name="approved_senders" minOccurs="0" type="xsd:string" />
+       <xsd:element name="archive" minOccurs="0" type="xsd:string" />
+       <xsd:element name="async_bounce" minOccurs="0" type="xsd:string" />
+       <xsd:element name="at_notify_on" minOccurs="0" type="xsd:string" />
+       <xsd:element name="authentication_data" minOccurs="0" type="xsd:string" />
+       <xsd:element name="authentication_type" minOccurs="0" type="xsd:string" />
+       <xsd:element name="autocreate_smtp" minOccurs="0" type="xsd:string" />
+       <xsd:element name="autocreate_web" minOccurs="0" type="xsd:string" />
+       <xsd:element name="blatant_spam" minOccurs="0" type="xsd:string" />
+       <xsd:element name="blocked_senders" minOccurs="0" type="xsd:string" />
+       <xsd:element name="bounce_fragments" minOccurs="0" type="xsd:string" />
+       <xsd:element name="company_name" minOccurs="0" type="xsd:string" />
+       <xsd:element name="create_method" minOccurs="0" type="xsd:string" />
+       <xsd:element name="created_date" minOccurs="0" type="xsd:string" />
+       <xsd:element name="creator" minOccurs="0" type="xsd:string" />
+       <xsd:element name="default_message_limit" minOccurs="0" type="xsd:string" />
+       <xsd:element name="default_user" minOccurs="0" type="xsd:string" />
+       <xsd:element name="disable_first_spam" minOccurs="0" type="xsd:string" />
+       <xsd:element name="disposition_virus" minOccurs="0" type="xsd:string" />
+       <xsd:element name="ext_encrypt" minOccurs="0" type="xsd:string" />
+       <xsd:element name="footer_on" minOccurs="0" type="xsd:string" />
+       <xsd:element name="iid" minOccurs="0" type="xsd:string" />
+       <xsd:element name="im_enable" minOccurs="0" type="xsd:string" />
+       <xsd:element name="im_external_enable" minOccurs="0" type="xsd:string" />
+       <xsd:element name="im_proto_enable" minOccurs="0" type="xsd:string" />
+       <xsd:element name="is_email_config" minOccurs="0" type="xsd:string" />
+       <xsd:element name="lang_locale" minOccurs="0" type="xsd:string" />
+       <xsd:element name="lastmod_date" minOccurs="0" type="xsd:string" />
+       <xsd:element name="max_message_size" minOccurs="0" type="xsd:string" />
+       <xsd:element name="ndr" minOccurs="0" type="xsd:string" />
+       <xsd:element name="non_account_bounce" minOccurs="0" type="xsd:string" />
+       <xsd:element name="non_account_virus_scan" minOccurs="0" type="xsd:string" />
+       <xsd:element name="orgname" minOccurs="0" type="xsd:string" />
+       <xsd:element name="out_at_notify_on" minOccurs="0" type="xsd:string" />
+       <xsd:element name="outbound_max_message_size" minOccurs="0" type="xsd:string" />
+       <xsd:element name="outbound_virus" minOccurs="0" type="xsd:string" />
+       <xsd:element name="outbound_virus_disposition" minOccurs="0" type="xsd:string" />
+       <xsd:element name="parent_org" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qsum_actionable" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qsum_enable" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qtine_redir_atq" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qtine_redir_ndr" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qtine_redir_out_atq" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qtine_redir_out_virus" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qtine_redir_spam" minOccurs="0" type="xsd:string" />
+       <xsd:element name="qtine_redir_virus" minOccurs="0" type="xsd:string" />
+       <xsd:element name="quarantine_links" minOccurs="0" type="xsd:string" />
+       <xsd:element name="quarsum_links" minOccurs="0" type="xsd:string" />
+       <xsd:element name="remotecmd_secret" minOccurs="0" type="xsd:string" />
+       <xsd:element name="spam_notify_on" minOccurs="0" type="xsd:string" />
+       <xsd:element name="support_contact" minOccurs="0" type="xsd:string" />
+       <xsd:element name="tagonly_spam" minOccurs="0" type="xsd:string" />
+       <xsd:element name="timezone" minOccurs="0" type="xsd:string" />
+       <xsd:element name="tls_notify_admin" minOccurs="0" type="xsd:string" />
+       <xsd:element name="tls_notify_on" minOccurs="0" type="xsd:string" />
+       <xsd:element name="virus_clean" minOccurs="0" type="xsd:string" />
+       <xsd:element name="virus_notify" minOccurs="0" type="xsd:string" />
+       <xsd:element name="welcome_on" minOccurs="0" type="xsd:string" />
+       <xsd:element name="zero_hour_notify_on" minOccurs="0" type="xsd:string" />
+       <xsd:element name="zero_hour_scan" minOccurs="0" type="xsd:string" />
+       <xsd:element name="zero_hour_waiver" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="orgReportRecord">
+   <xsd:all>
+       <xsd:element name="acc_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="account" minOccurs="0" type="xsd:string" />
+       <xsd:element name="bad_isp" minOccurs="0" type="xsd:string" />
+       <xsd:element name="bad_sender" minOccurs="0" type="xsd:string" />
+       <xsd:element name="bulk" minOccurs="0" type="xsd:string" />
+       <xsd:element name="bytes" minOccurs="0" type="xsd:string" />
+       <xsd:element name="clean_failures" minOccurs="0" type="xsd:string" />
+       <xsd:element name="cleanings" minOccurs="0" type="xsd:string" />
+       <xsd:element name="commerce" minOccurs="0" type="xsd:string" />
+       <xsd:element name="customerid" minOccurs="0" type="xsd:string" />
+       <xsd:element name="customername" minOccurs="0" type="xsd:string" />
+       <xsd:element name="deliveries" minOccurs="0" type="xsd:string" />
+       <xsd:element name="inf_deliveries" minOccurs="0" type="xsd:string" />
+       <xsd:element name="messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="mmf" minOccurs="0" type="xsd:string" />
+       <xsd:element name="naughty" minOccurs="0" type="xsd:string" />
+       <xsd:element name="num_bh_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="num_bytes" minOccurs="0" type="xsd:string" />
+       <xsd:element name="num_f_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="num_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="num_q_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="num_spams" minOccurs="0" type="xsd:string" />
+       <xsd:element name="num_viruses" minOccurs="0" type="xsd:string" />
+       <xsd:element name="pct_bh_bytes" minOccurs="0" type="xsd:string" />
+       <xsd:element name="pct_bh_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="pct_f_bytes" minOccurs="0" type="xsd:string" />
+       <xsd:element name="pct_f_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="pct_q_bytes" minOccurs="0" type="xsd:string" />
+       <xsd:element name="pct_q_messages" minOccurs="0" type="xsd:string" />
+       <xsd:element name="productid" minOccurs="0" type="xsd:string" />
+       <xsd:element name="racial" minOccurs="0" type="xsd:string" />
+       <xsd:element name="recip" minOccurs="0" type="xsd:string" />
+       <xsd:element name="sellerid" minOccurs="0" type="xsd:string" />
+       <xsd:element name="ssb" minOccurs="0" type="xsd:string" />
+       <xsd:element name="stored_size" minOccurs="0" type="xsd:string" />
+       <xsd:element name="users" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name="spoolRecord">
+   <xsd:all>
+       <xsd:element name="auto_unspool" minOccurs="0" type="xsd:string" />
+       <xsd:element name="despool_max_connections" minOccurs="0" type="xsd:string" />
+       <xsd:element name="duration" minOccurs="0" type="xsd:string" />
+       <xsd:element name="org" minOccurs="0" type="xsd:string" />
+       <xsd:element name="quota" minOccurs="0" type="xsd:string" />
+       <xsd:element name="spool_delay" minOccurs="0" type="xsd:string" />
+       <xsd:element name="spool_mech" minOccurs="0" type="xsd:string" />
+       <xsd:element name="status" minOccurs="0" type="xsd:string" />
+       <xsd:element name="used_pct" minOccurs="0" type="xsd:string" />
+       <xsd:element name="used_size" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+
+<xsd:complexType name="suspenduser">
+   <xsd:sequence>
+       <xsd:element name="authElem" type="tns:authElem" />
+       <xsd:element name="userAddressOrId" type="xsd:string" />
+       <xsd:element name="optArgStr1" minOccurs="0" type="xsd:string" />
+       <xsd:element name="optArgStr2" minOccurs="0" type="xsd:string" />
+       <xsd:element name="optArgStr3" minOccurs="0" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="suspenduserResponse">
+   <xsd:sequence>
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="test">
+   <xsd:sequence>
+       <xsd:element name="should_work" type="xsd:boolean" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="testResponse">
+   <xsd:sequence>
+       <xsd:element name="confirmation_message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="userRecord">
+   <xsd:all>
+       <xsd:element name="active" minOccurs="0" type="xsd:string" />
+       <xsd:element name="address" minOccurs="0" type="xsd:string" />
+       <xsd:element name="approved_recipients" minOccurs="0" type="xsd:string" />
+       <xsd:element name="approved_senders" minOccurs="0" type="xsd:string" />
+       <xsd:element name="blocked_senders" minOccurs="0" type="xsd:string" />
+       <xsd:element name="create_method" minOccurs="0" type="xsd:string" />
+       <xsd:element name="created_date" minOccurs="0" type="xsd:string" />
+       <xsd:element name="ext_encrypt" minOccurs="0" type="xsd:string" />
+       <xsd:element name="filter_adult" minOccurs="0" type="xsd:string" />
+       <xsd:element name="filter_bulk" minOccurs="0" type="xsd:string" />
+       <xsd:element name="filter_getrich" minOccurs="0" type="xsd:string" />
+       <xsd:element name="filter_offers" minOccurs="0" type="xsd:string" />
+       <xsd:element name="filter_racial" minOccurs="0" type="xsd:string" />
+       <xsd:element name="initial_password" minOccurs="0" type="xsd:string" />
+       <xsd:element name="junkmail_filter" minOccurs="0" type="xsd:string" />
+       <xsd:element name="lang_locale" minOccurs="0" type="xsd:string" />
+       <xsd:element name="lastmod_date" minOccurs="0" type="xsd:string" />
+       <xsd:element name="message_count" minOccurs="0" type="xsd:string" />
+       <xsd:element name="message_limit" minOccurs="0" type="xsd:string" />
+       <xsd:element name="message_limited" minOccurs="0" type="xsd:string" />
+       <xsd:element name="notice_address" minOccurs="0" type="xsd:string" />
+       <xsd:element name="orgid" minOccurs="0" type="xsd:string" />
+       <xsd:element name="orgtag" minOccurs="0" type="xsd:string" />
+       <xsd:element name="password" minOccurs="0" type="xsd:string" />
+       <xsd:element name="timezone" minOccurs="0" type="xsd:string" />
+       <xsd:element name="user_id" minOccurs="0" type="xsd:string" />
+       <xsd:element name="virus_notify" minOccurs="0" type="xsd:string" />
+       <xsd:element name="virus_state" minOccurs="0" type="xsd:string" />
+       <xsd:element name="weblocked" minOccurs="0" type="xsd:string" />
+       <xsd:element name="welcome_count" minOccurs="0" type="xsd:string" />
+       <xsd:element name="wireless_state" minOccurs="0" type="xsd:string" />
+   </xsd:all>
+</xsd:complexType>
+
+
+
+<xsd:element name="AdminBlockException" type="tns:AdminBlockException" />
+
+<xsd:element name="AuthenticationException" type="tns:AuthenticationException" />
+
+<xsd:element name="BatchException" type="tns:BatchException" />
+
+<xsd:element name="InternalException" type="tns:InternalException" />
+
+<xsd:element name="InvalidValueException" type="tns:InvalidValueException" />
+
+<xsd:element name="MalformedKeyException" type="tns:MalformedKeyException" />
+
+<xsd:element name="MissingElementException" type="tns:MissingElementException" />
+
+<xsd:element name="NoSuchKeyException" type="tns:NoSuchKeyException" />
+
+<xsd:element name="StatusException" type="tns:StatusException" />
+
+<xsd:element name="UnknownInternalException" type="tns:UnknownInternalException" />
+
+<xsd:element name="addalias" type="tns:addalias" />
+
+<xsd:element name="addaliasResponse" type="tns:addaliasResponse" />
+
+<xsd:element name="adddomain" type="tns:adddomain" />
+
+<xsd:element name="adddomainResponse" type="tns:adddomainResponse" />
+
+<xsd:element name="addorg" type="tns:addorg" />
+
+<xsd:element name="addorgResponse" type="tns:addorgResponse" />
+
+<xsd:element name="adduser" type="tns:adduser" />
+
+<xsd:element name="adduserResponse" type="tns:adduserResponse" />
+
+<xsd:element name="checkauth" type="tns:checkauth" />
+
+<xsd:element name="checkauthResponse" type="tns:checkauthResponse" />
+
+<xsd:element name="deletealias" type="tns:deletealias" />
+
+<xsd:element name="deletealiasResponse" type="tns:deletealiasResponse" />
+
+<xsd:element name="deletedomain" type="tns:deletedomain" />
+
+<xsd:element name="deletedomainResponse" type="tns:deletedomainResponse" />
+
+<xsd:element name="deleteorg" type="tns:deleteorg" />
+
+<xsd:element name="deleteorgResponse" type="tns:deleteorgResponse" />
+
+<xsd:element name="deleteuser" type="tns:deleteuser" />
+
+<xsd:element name="deleteuserResponse" type="tns:deleteuserResponse" />
+
+<xsd:element name="displaydomain" type="tns:displaydomain" />
+
+<xsd:element name="displaydomainResponse" type="tns:displaydomainResponse" />
+
+<xsd:element name="displayorg" type="tns:displayorg" />
+
+<xsd:element name="displayorgResponse" type="tns:displayorgResponse" />
+
+<xsd:element name="displayspool" type="tns:displayspool" />
+
+<xsd:element name="displayspoolResponse" type="tns:displayspoolResponse" />
+
+<xsd:element name="displayuser" type="tns:displayuser" />
+
+<xsd:element name="displayuserResponse" type="tns:displayuserResponse" />
+
+<xsd:element name="getorgreport" type="tns:getorgreport" />
+
+<xsd:element name="getorgreportResponse" type="tns:getorgreportResponse" />
+
+<xsd:element name="listdomains" type="tns:listdomains" />
+
+<xsd:element name="listdomainsResponse" type="tns:listdomainsResponse" />
+
+<xsd:element name="listorgs" type="tns:listorgs" />
+
+<xsd:element name="listorgsResponse" type="tns:listorgsResponse" />
+
+<xsd:element name="listusers" type="tns:listusers" />
+
+<xsd:element name="listusersResponse" type="tns:listusersResponse" />
+
+<xsd:element name="modifydomain" type="tns:modifydomain" />
+
+<xsd:element name="modifydomainResponse" type="tns:modifydomainResponse" />
+
+<xsd:element name="modifyorg" type="tns:modifyorg" />
+
+<xsd:element name="modifyorgResponse" type="tns:modifyorgResponse" />
+
+<xsd:element name="modifyuser" type="tns:modifyuser" />
+
+<xsd:element name="modifyuserResponse" type="tns:modifyuserResponse" />
+
+<xsd:element name="suspenduser" type="tns:suspenduser" />
+
+<xsd:element name="suspenduserResponse" type="tns:suspenduserResponse" />
+
+<xsd:element name="test" type="tns:test" />
+
+<xsd:element name="testResponse" type="tns:testResponse" />
+
+
+    </schema>
+</wsdl:types>
+
+<wsdl:message name="StatusException">
+    <wsdl:part name="fault" element="tns:StatusException"/>
+</wsdl:message>
+
+
+<wsdl:message name="BatchException">
+    <wsdl:part name="fault" element="tns:BatchException"/>
+</wsdl:message>
+
+
+<wsdl:message name="InternalException">
+    <wsdl:part name="fault" element="tns:InternalException"/>
+</wsdl:message>
+
+
+<wsdl:message name="UnknownInternalException">
+    <wsdl:part name="fault" element="tns:UnknownInternalException"/>
+</wsdl:message>
+
+
+<wsdl:message name="MissingElementException">
+    <wsdl:part name="fault" element="tns:MissingElementException"/>
+</wsdl:message>
+
+
+<wsdl:message name="InvalidValueException">
+    <wsdl:part name="fault" element="tns:InvalidValueException"/>
+</wsdl:message>
+
+
+<wsdl:message name="AuthenticationException">
+    <wsdl:part name="fault" element="tns:AuthenticationException"/>
+</wsdl:message>
+
+
+<wsdl:message name="MalformedKeyException">
+    <wsdl:part name="fault" element="tns:MalformedKeyException"/>
+</wsdl:message>
+
+
+<wsdl:message name="NoSuchKeyException">
+    <wsdl:part name="fault" element="tns:NoSuchKeyException"/>
+</wsdl:message>
+
+
+<wsdl:message name="AdminBlockException">
+    <wsdl:part name="fault" element="tns:AdminBlockException"/>
+</wsdl:message>
+
+
+<wsdl:message name="test">
+    <wsdl:part name="parameters" element="tns:test"/>
+</wsdl:message>
+
+
+<wsdl:message name="testResponse">
+    <wsdl:part name="parameters" element="tns:testResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="checkauth">
+    <wsdl:part name="parameters" element="tns:checkauth"/>
+</wsdl:message>
+
+
+<wsdl:message name="checkauthResponse">
+    <wsdl:part name="parameters" element="tns:checkauthResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="addalias">
+    <wsdl:part name="parameters" element="tns:addalias"/>
+</wsdl:message>
+
+
+<wsdl:message name="addaliasResponse">
+    <wsdl:part name="parameters" element="tns:addaliasResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="adddomain">
+    <wsdl:part name="parameters" element="tns:adddomain"/>
+</wsdl:message>
+
+
+<wsdl:message name="adddomainResponse">
+    <wsdl:part name="parameters" element="tns:adddomainResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="addorg">
+    <wsdl:part name="parameters" element="tns:addorg"/>
+</wsdl:message>
+
+
+<wsdl:message name="addorgResponse">
+    <wsdl:part name="parameters" element="tns:addorgResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="adduser">
+    <wsdl:part name="parameters" element="tns:adduser"/>
+</wsdl:message>
+
+
+<wsdl:message name="adduserResponse">
+    <wsdl:part name="parameters" element="tns:adduserResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="deletealias">
+    <wsdl:part name="parameters" element="tns:deletealias"/>
+</wsdl:message>
+
+
+<wsdl:message name="deletealiasResponse">
+    <wsdl:part name="parameters" element="tns:deletealiasResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="deletedomain">
+    <wsdl:part name="parameters" element="tns:deletedomain"/>
+</wsdl:message>
+
+
+<wsdl:message name="deletedomainResponse">
+    <wsdl:part name="parameters" element="tns:deletedomainResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="deleteorg">
+    <wsdl:part name="parameters" element="tns:deleteorg"/>
+</wsdl:message>
+
+
+<wsdl:message name="deleteorgResponse">
+    <wsdl:part name="parameters" element="tns:deleteorgResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="deleteuser">
+    <wsdl:part name="parameters" element="tns:deleteuser"/>
+</wsdl:message>
+
+
+<wsdl:message name="deleteuserResponse">
+    <wsdl:part name="parameters" element="tns:deleteuserResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="displaydomain">
+    <wsdl:part name="parameters" element="tns:displaydomain"/>
+</wsdl:message>
+
+
+<wsdl:message name="displaydomainResponse">
+    <wsdl:part name="parameters" element="tns:displaydomainResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="displayorg">
+    <wsdl:part name="parameters" element="tns:displayorg"/>
+</wsdl:message>
+
+
+<wsdl:message name="displayorgResponse">
+    <wsdl:part name="parameters" element="tns:displayorgResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="displayspool">
+    <wsdl:part name="parameters" element="tns:displayspool"/>
+</wsdl:message>
+
+
+<wsdl:message name="displayspoolResponse">
+    <wsdl:part name="parameters" element="tns:displayspoolResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="displayuser">
+    <wsdl:part name="parameters" element="tns:displayuser"/>
+</wsdl:message>
+
+
+<wsdl:message name="displayuserResponse">
+    <wsdl:part name="parameters" element="tns:displayuserResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="getorgreport">
+    <wsdl:part name="parameters" element="tns:getorgreport"/>
+</wsdl:message>
+
+
+<wsdl:message name="getorgreportResponse">
+    <wsdl:part name="parameters" element="tns:getorgreportResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="listdomains">
+    <wsdl:part name="parameters" element="tns:listdomains"/>
+</wsdl:message>
+
+
+<wsdl:message name="listdomainsResponse">
+    <wsdl:part name="parameters" element="tns:listdomainsResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="listorgs">
+    <wsdl:part name="parameters" element="tns:listorgs"/>
+</wsdl:message>
+
+
+<wsdl:message name="listorgsResponse">
+    <wsdl:part name="parameters" element="tns:listorgsResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="listusers">
+    <wsdl:part name="parameters" element="tns:listusers"/>
+</wsdl:message>
+
+
+<wsdl:message name="listusersResponse">
+    <wsdl:part name="parameters" element="tns:listusersResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="modifydomain">
+    <wsdl:part name="parameters" element="tns:modifydomain"/>
+</wsdl:message>
+
+
+<wsdl:message name="modifydomainResponse">
+    <wsdl:part name="parameters" element="tns:modifydomainResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="modifyorg">
+    <wsdl:part name="parameters" element="tns:modifyorg"/>
+</wsdl:message>
+
+
+<wsdl:message name="modifyorgResponse">
+    <wsdl:part name="parameters" element="tns:modifyorgResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="modifyuser">
+    <wsdl:part name="parameters" element="tns:modifyuser"/>
+</wsdl:message>
+
+
+<wsdl:message name="modifyuserResponse">
+    <wsdl:part name="parameters" element="tns:modifyuserResponse"/>
+</wsdl:message>
+
+
+<wsdl:message name="suspenduser">
+    <wsdl:part name="parameters" element="tns:suspenduser"/>
+</wsdl:message>
+
+
+<wsdl:message name="suspenduserResponse">
+    <wsdl:part name="parameters" element="tns:suspenduserResponse"/>
+</wsdl:message>
+ 
+<wsdl:portType name="AutomatedBatchPort">
+
+  <wsdl:operation name="test">
+     <wsdl:documentation>Performs simple connection level round-trip testing.</wsdl:documentation> 
+     <wsdl:input message="tns:test" name="test"/>
+     <wsdl:output message="tns:testResponse" name="testResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="StatusException" message="tns:StatusException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="checkauth">
+     <wsdl:documentation>Verifies the specified authentication credentials without the need to call another operation.</wsdl:documentation> 
+     <wsdl:input message="tns:checkauth" name="checkauth"/>
+     <wsdl:output message="tns:checkauthResponse" name="checkauthResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="addalias">
+     <wsdl:documentation>Add a user alias</wsdl:documentation> 
+     <wsdl:input message="tns:addalias" name="addalias"/>
+     <wsdl:output message="tns:addaliasResponse" name="addaliasResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="adddomain">
+     <wsdl:documentation>Add a domain</wsdl:documentation> 
+     <wsdl:input message="tns:adddomain" name="adddomain"/>
+     <wsdl:output message="tns:adddomainResponse" name="adddomainResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="addorg">
+     <wsdl:documentation>Add a org</wsdl:documentation> 
+     <wsdl:input message="tns:addorg" name="addorg"/>
+     <wsdl:output message="tns:addorgResponse" name="addorgResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="adduser">
+     <wsdl:documentation>Add a user</wsdl:documentation> 
+     <wsdl:input message="tns:adduser" name="adduser"/>
+     <wsdl:output message="tns:adduserResponse" name="adduserResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deletealias">
+     <wsdl:documentation>Delete a user alias</wsdl:documentation> 
+     <wsdl:input message="tns:deletealias" name="deletealias"/>
+     <wsdl:output message="tns:deletealiasResponse" name="deletealiasResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deletedomain">
+     <wsdl:documentation>Delete a domain</wsdl:documentation> 
+     <wsdl:input message="tns:deletedomain" name="deletedomain"/>
+     <wsdl:output message="tns:deletedomainResponse" name="deletedomainResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deleteorg">
+     <wsdl:documentation>Delete a org</wsdl:documentation> 
+     <wsdl:input message="tns:deleteorg" name="deleteorg"/>
+     <wsdl:output message="tns:deleteorgResponse" name="deleteorgResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deleteuser">
+     <wsdl:documentation>Delete a user</wsdl:documentation> 
+     <wsdl:input message="tns:deleteuser" name="deleteuser"/>
+     <wsdl:output message="tns:deleteuserResponse" name="deleteuserResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displaydomain">
+     <wsdl:documentation>Display domain information</wsdl:documentation> 
+     <wsdl:input message="tns:displaydomain" name="displaydomain"/>
+     <wsdl:output message="tns:displaydomainResponse" name="displaydomainResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displayorg">
+     <wsdl:documentation>Display org information</wsdl:documentation> 
+     <wsdl:input message="tns:displayorg" name="displayorg"/>
+     <wsdl:output message="tns:displayorgResponse" name="displayorgResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displayspool">
+     <wsdl:documentation>Display email org spooling information</wsdl:documentation> 
+     <wsdl:input message="tns:displayspool" name="displayspool"/>
+     <wsdl:output message="tns:displayspoolResponse" name="displayspoolResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displayuser">
+     <wsdl:documentation>Display user information</wsdl:documentation> 
+     <wsdl:input message="tns:displayuser" name="displayuser"/>
+     <wsdl:output message="tns:displayuserResponse" name="displayuserResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="getorgreport">
+     <wsdl:documentation>Get org report</wsdl:documentation> 
+     <wsdl:input message="tns:getorgreport" name="getorgreport"/>
+     <wsdl:output message="tns:getorgreportResponse" name="getorgreportResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="listdomains">
+     <wsdl:documentation>List domain information</wsdl:documentation> 
+     <wsdl:input message="tns:listdomains" name="listdomains"/>
+     <wsdl:output message="tns:listdomainsResponse" name="listdomainsResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="listorgs">
+     <wsdl:documentation>List org information</wsdl:documentation> 
+     <wsdl:input message="tns:listorgs" name="listorgs"/>
+     <wsdl:output message="tns:listorgsResponse" name="listorgsResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="listusers">
+     <wsdl:documentation>Retrieve a list of users meeting arbitary criteria</wsdl:documentation> 
+     <wsdl:input message="tns:listusers" name="listusers"/>
+     <wsdl:output message="tns:listusersResponse" name="listusersResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="modifydomain">
+     <wsdl:documentation>Modify domain information</wsdl:documentation> 
+     <wsdl:input message="tns:modifydomain" name="modifydomain"/>
+     <wsdl:output message="tns:modifydomainResponse" name="modifydomainResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="modifyorg">
+     <wsdl:documentation>Modify org information</wsdl:documentation> 
+     <wsdl:input message="tns:modifyorg" name="modifyorg"/>
+     <wsdl:output message="tns:modifyorgResponse" name="modifyorgResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="modifyuser">
+     <wsdl:documentation>Modify user information</wsdl:documentation> 
+     <wsdl:input message="tns:modifyuser" name="modifyuser"/>
+     <wsdl:output message="tns:modifyuserResponse" name="modifyuserResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="suspenduser">
+     <wsdl:documentation>Suspend a user</wsdl:documentation> 
+     <wsdl:input message="tns:suspenduser" name="suspenduser"/>
+     <wsdl:output message="tns:suspenduserResponse" name="suspenduserResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="AuthenticationException" message="tns:AuthenticationException"/>
+     <wsdl:fault name="BatchException" message="tns:BatchException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+ 
+</wsdl:portType>
+
+<wsdl:binding name="AutomatedBatchBinding" type="tns:AutomatedBatchPort">
+   <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+
+  <wsdl:operation name="test">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="test"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="testResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="StatusException"><soap:fault name="StatusException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="checkauth">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkauth"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="checkauthResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="addalias">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addalias"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="addaliasResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="adddomain">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="adddomain"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="adddomainResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="addorg">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addorg"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="addorgResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="adduser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="adduser"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="adduserResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deletealias">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deletealias"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="deletealiasResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deletedomain">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deletedomain"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="deletedomainResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deleteorg">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteorg"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="deleteorgResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="deleteuser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteuser"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="deleteuserResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displaydomain">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="displaydomain"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="displaydomainResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displayorg">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="displayorg"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="displayorgResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displayspool">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="displayspool"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="displayspoolResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="displayuser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="displayuser"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="displayuserResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="getorgreport">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getorgreport"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="getorgreportResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="listdomains">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listdomains"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="listdomainsResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="listorgs">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listorgs"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="listorgsResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="listusers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listusers"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="listusersResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="modifydomain">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modifydomain"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="modifydomainResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="modifyorg">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modifyorg"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="modifyorgResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="modifyuser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modifyuser"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="modifyuserResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+
+  <wsdl:operation name="suspenduser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="suspenduser"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="suspenduserResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="AuthenticationException"><soap:fault name="AuthenticationException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="BatchException"><soap:fault name="BatchException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+</wsdl:binding>
+
+<wsdl:service name="AutomatedBatchService">
+  <wsdl:port name="AutomatedBatchPort" binding="tns:AutomatedBatchBinding">
+    <soap:address location="https://api-s200.postini.com/api2/automatedbatch"/>
+  </wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
