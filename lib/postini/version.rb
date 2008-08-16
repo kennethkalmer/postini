@@ -1,4 +1,4 @@
-module Postini4r
+module Postini
   module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 0

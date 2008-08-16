@@ -6,14 +6,14 @@ README.txt
 Rakefile
 config/hoe.rb
 config/requirements.rb
-lib/postini4r.rb
-lib/postini4r/version.rb
+lib/postini.rb
+lib/postini/version.rb
 script/console
 script/destroy
 script/generate
 script/txt2html
 setup.rb
-spec/postini4r_spec.rb
+spec/postini_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/deployment.rake

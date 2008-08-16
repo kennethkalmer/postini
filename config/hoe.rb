@@ -1,19 +1,20 @@
-require 'postini4r/version'
+require 'postini/version'
 
-AUTHOR = 'FIXME full name'  # can also be an array of Authors
-EMAIL = "FIXME email"
-DESCRIPTION = "description of gem"
-GEM_NAME = 'postini4r' # what ppl will type to install your gem
+AUTHOR = 'Kenneth Kalmer'  # can also be an array of Authors
+EMAIL = "kenneth.kalmer@gmail.com"
+DESCRIPTION = "Ruby wrapper around the Postini SOAP API (Early Access Program)"
+GEM_NAME = 'postini' # what ppl will type to install your gem
 RUBYFORGE_PROJECT = 'postini4r' # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 EXTRA_DEPENDENCIES = [
 #  ['activesupport', '>= 1.3.1']
+  ['soap4r', '=1.5.8']
 ]    # An array of rubygem dependencies [name, version]
 
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil
-RUBYFORGE_USERNAME = "unknown"
+RUBYFORGE_USERNAME = "kennethkalmer"
 def rubyforge_username
   unless @config
     begin
@@ -34,8 +35,8 @@ end
 REV = nil
 # UNCOMMENT IF REQUIRED:
 # REV = YAML.load(`svn info`)['Revision']
-VERS = Postini4r::VERSION::STRING + (REV ? ".#{REV}" : "")
-RDOC_OPTS = ['--quiet', '--title', 'postini4r documentation',
+VERS = Postini::VERSION::STRING + (REV ? ".#{REV}" : "")
+RDOC_OPTS = ['--quiet', '--title', 'postini documentation',
     "--opname", "index.html",
     "--line-numbers",
     "--main", "README",

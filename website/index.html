@@ -1,11 +1,84 @@
-<html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>postini4r</title>
-		
-	</head>
-	<body id="body">
-		<p>This page has not yet been created for RubyGem <code>postini4r</code></p>
-		<p>To the developer: To generate it, update website/index.txt and run the rake task <code>website</code> to generate this <code>index.html</code> file.</p>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+      postini4r
+  </title>
+  <script src="javascripts/rounded_corners_lite.inc.js" type="text/javascript"></script>
+<style>
+
+</style>
+  <script type="text/javascript">
+    window.onload = function() {
+      settings = {
+          tl: { radius: 10 },
+          tr: { radius: 10 },
+          bl: { radius: 10 },
+          br: { radius: 10 },
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+      }
+      var versionBox = new curvyCorners(settings, document.getElementById("version"));
+      versionBox.applyCornersToAll();
+    }
+  </script>
+</head>
+<body>
+<div id="main">
+
+    <h1>postini4r</h1>
+    <div id="version" class="clickable" onclick='document.location = "http://rubyforge.org/projects/postini4r"; return false'>
+      <p>Get Version</p>
+      <a href="http://rubyforge.org/projects/postini4r" class="numbers">0.0.1</a>
+    </div>
+    <h2>What</h2>
+<p>postini4r is a Ruby wrapper library for the <a href="http://www.postini.com/">Postini</a> <span class="caps">SOAP</span> <span class="caps">API</span> (Early Access Program).</p>
+<p>postini4r aims to be fully compliant with the Postini <span class="caps">API</span>, starting off with what I need first, and then expanding to eventually cover all the available commands in the Batch Command Reference.</p>
+<h2>Requirements</h2>
+<ul>
+	<li>postini4r requires that you gain access to the Postini Early Access Program and an <span class="caps">API</span> key. You need to contact your Postini Service Provider (or Postini directly if you deal with them).</li>
+	<li>soap4r</li>
+</ul>
+<h2>Installing</h2>
+<p><pre class='syntax'><span class="ident">sudo</span> <span class="ident">gem</span> <span class="ident">install</span> <span class="ident">postini4r</span></pre></p>
+<h2>Demonstration of usage</h2>
+<p><span class="caps">TODO</span> &#8211; Comin soon, refer to the current specs for some samples</p>
+<h2>Forum</h2>
+<p><a href="http://groups.google.com/group/postini-ruby">http://groups.google.com/group/postini-ruby</a></p>
+<p>Join us in the postini-ruby group for discussing everything aroung Postini and Ruby, and possibly Postini in general.</p>
+<h2>How to submit patches</h2>
+<p>Read the <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/">8 steps for fixing other people&#8217;s code</a> and for section <a href="http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups">8b: Submit patch to Google Groups</a>, use the Google Group above.</p>
+<p>You can fetch the source from either:</p>
+<ul>
+	<li>rubyforge: <a href="http://rubyforge.org/scm/?group_id=6826">http://rubyforge.org/scm/?group_id=6826</a></li>
+</ul>
+<pre>git clone git://rubyforge.org/postini4r.git</pre>
+<ul>
+	<li>github: <a href="http://github.com/kennethkalmer/postini4r/tree/master">http://github.com/kennethkalmer/postini4r/tree/master</a></li>
+</ul>
+<pre>git clone git://github.com/kennethkalmer/postini4r.git</pre>
+<h3>Build and test instructions</h3>
+<pre>cd postini4r
+rake spec
+rake install_gem</pre>
+<h2>License</h2>
+<p>This code is free to use under the terms of the <span class="caps">MIT</span> license.</p>
+<h2>Contact</h2>
+<p>Comments are welcome. Send an email to <a href="mailto:kenneth.kalmer@gmail.com">me</a> via the <a href="http://groups.google.com/group/postini4r">forum</a></p>
+<h2>Credits</h2>
+<p>postini4r is developed by <a href="http://www.opensourcery.co.za/">Kenneth Kalmer</a> for <a href="http://www.spaminabox.co.za"><span class="caps">SPAM</span> in a Box</a> who has allowed the library to be released under the <span class="caps">MIT</span> License through their sponsorship.</p>
+    <p class="coda">
+      <a href="http://www.opensourcery.co.za">Kenneth Kalmer</a> &amp;
+      <a href="http://www.spaminabox.co.za">SPAM in a Box</a>, 16th August 2008<br>
+      Theme extended from <a href="http://rb2js.rubyforge.org/">Paul Battley</a>
+    </p>
+</div>
+
+<!-- insert site tracking codes here, like Google Urchin -->
+
+</body>
 </html>

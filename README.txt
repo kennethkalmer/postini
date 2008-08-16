@@ -1,10 +1,15 @@
 = postini4r
 
-* FIX (url)
+* http://postini4r.rubyforge.org/
 
 == DESCRIPTION:
 
-FIX (describe your package)
+A Ruby wrapper library to make the Postini SOAP API more palatable.
+
+Postini is the world leader in email message scanning, filtering and archiving.
+This library provides users of Postini with a convenient Ruby library that 
+exposes the Postini SOAP API (Early Access Program) through more familiar
+Rubyisms.
 
 == FEATURES/PROBLEMS:
 
@@ -12,21 +17,31 @@ FIX (describe your package)
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  FIX
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* Approved access to the Postini Early Access Program (contact your Postini
+  provider)
+* soap4r
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install soap4r
+
+== TRADEMARKS:
+
+Postini, the Postini Logo, Perimeter Manager, Security Manager, Network Edition,
+AirPostini, and Postini Message Platform are either registered trademarks or 
+trademarks of Postini Inc. Postini is a registered trademark of Postini, Inc.
+All other trademarks are the property of their respective holders.
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 FIXME full name
+Copyright (c) 2008 Clear Planet Information Solutions (Pty) Ltd
+Copyright (c) 2008 ISP in a Box CC
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

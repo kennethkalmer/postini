@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Originating Build y6_14_9c0, y6_14_9c0, Thu May 22 11:20:45 PDT 2008-->
+
+<wsdl:definitions
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xmime="http://www.w3.org/2004/11/xmlmime"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:tns="http://postini.com/PSTN/SOAPAPI/v2/endpointresolver"
+   targetNamespace="http://postini.com/PSTN/SOAPAPI/v2/endpointresolver"
+   name="EndpointResolver"
+>
+
+<wsdl:types>
+    <schema
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://postini.com/PSTN/SOAPAPI/v2/endpointresolver"
+    > 
+
+<xsd:complexType name="AdminBlockException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="GetServiceEndpoint">
+   <xsd:sequence>
+       <xsd:element name="apiKey" type="xsd:string" />
+       <xsd:element name="email" type="xsd:string" />
+       <xsd:element name="service" type="tns:service" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="GetServiceEndpointResponse">
+   <xsd:sequence>
+       <xsd:element name="EndpointURI" minOccurs="0" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="InternalException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="InvalidValueException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="MalformedKeyException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="MissingElementException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="NoSuchKeyException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="UnknownEmailException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="UnknownInternalException">
+   <xsd:sequence>
+       <xsd:element name="message" type="xsd:string" />
+   </xsd:sequence>
+</xsd:complexType>
+
+
+
+
+
+<xsd:simpleType name="service">
+   <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="v1"/>
+      <xsd:enumeration value="v2AutomatedBatch"/>
+      <xsd:enumeration value="v2PersonalArchive"/>
+      <xsd:enumeration value="v2UserSync"/>
+   </xsd:restriction>
+</xsd:simpleType>
+
+
+
+
+<xsd:element name="AdminBlockException" type="tns:AdminBlockException" />
+
+<xsd:element name="GetServiceEndpoint" type="tns:GetServiceEndpoint" />
+
+<xsd:element name="GetServiceEndpointResponse" type="tns:GetServiceEndpointResponse" />
+
+<xsd:element name="InternalException" type="tns:InternalException" />
+
+<xsd:element name="InvalidValueException" type="tns:InvalidValueException" />
+
+<xsd:element name="MalformedKeyException" type="tns:MalformedKeyException" />
+
+<xsd:element name="MissingElementException" type="tns:MissingElementException" />
+
+<xsd:element name="NoSuchKeyException" type="tns:NoSuchKeyException" />
+
+<xsd:element name="UnknownEmailException" type="tns:UnknownEmailException" />
+
+<xsd:element name="UnknownInternalException" type="tns:UnknownInternalException" />
+
+
+    </schema>
+</wsdl:types>
+
+<wsdl:message name="UnknownEmailException">
+    <wsdl:part name="fault" element="tns:UnknownEmailException"/>
+</wsdl:message>
+
+
+<wsdl:message name="InternalException">
+    <wsdl:part name="fault" element="tns:InternalException"/>
+</wsdl:message>
+
+
+<wsdl:message name="UnknownInternalException">
+    <wsdl:part name="fault" element="tns:UnknownInternalException"/>
+</wsdl:message>
+
+
+<wsdl:message name="MissingElementException">
+    <wsdl:part name="fault" element="tns:MissingElementException"/>
+</wsdl:message>
+
+
+<wsdl:message name="InvalidValueException">
+    <wsdl:part name="fault" element="tns:InvalidValueException"/>
+</wsdl:message>
+
+
+<wsdl:message name="MalformedKeyException">
+    <wsdl:part name="fault" element="tns:MalformedKeyException"/>
+</wsdl:message>
+
+
+<wsdl:message name="NoSuchKeyException">
+    <wsdl:part name="fault" element="tns:NoSuchKeyException"/>
+</wsdl:message>
+
+
+<wsdl:message name="AdminBlockException">
+    <wsdl:part name="fault" element="tns:AdminBlockException"/>
+</wsdl:message>
+
+
+<wsdl:message name="GetServiceEndpoint">
+    <wsdl:part name="parameters" element="tns:GetServiceEndpoint"/>
+</wsdl:message>
+
+
+<wsdl:message name="GetServiceEndpointResponse">
+    <wsdl:part name="parameters" element="tns:GetServiceEndpointResponse"/>
+</wsdl:message>
+ 
+<wsdl:portType name="EndpointResolverPort">
+
+  <wsdl:operation name="GetServiceEndpoint">
+     <wsdl:documentation>Perform a endpoint lookup for the specified service and user email</wsdl:documentation> 
+     <wsdl:input message="tns:GetServiceEndpoint" name="GetServiceEndpoint"/>
+     <wsdl:output message="tns:GetServiceEndpointResponse" name="GetServiceEndpointResponse"/>
+     <wsdl:fault name="AdminBlockException" message="tns:AdminBlockException"/>
+     <wsdl:fault name="InternalException" message="tns:InternalException"/>
+     <wsdl:fault name="InvalidValueException" message="tns:InvalidValueException"/>
+     <wsdl:fault name="MalformedKeyException" message="tns:MalformedKeyException"/>
+     <wsdl:fault name="MissingElementException" message="tns:MissingElementException"/>
+     <wsdl:fault name="NoSuchKeyException" message="tns:NoSuchKeyException"/>
+     <wsdl:fault name="UnknownEmailException" message="tns:UnknownEmailException"/>
+     <wsdl:fault name="UnknownInternalException" message="tns:UnknownInternalException"/>
+  </wsdl:operation>
+ 
+</wsdl:portType>
+
+<wsdl:binding name="EndpointResolverBinding" type="tns:EndpointResolverPort">
+   <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+
+  <wsdl:operation name="GetServiceEndpoint">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetServiceEndpoint"><soap:body use="literal"/></wsdl:input>
+      <wsdl:output name="GetServiceEndpointResponse"><soap:body use="literal"/></wsdl:output>
+      <wsdl:fault name="AdminBlockException"><soap:fault name="AdminBlockException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InternalException"><soap:fault name="InternalException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="InvalidValueException"><soap:fault name="InvalidValueException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MalformedKeyException"><soap:fault name="MalformedKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="MissingElementException"><soap:fault name="MissingElementException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="NoSuchKeyException"><soap:fault name="NoSuchKeyException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownEmailException"><soap:fault name="UnknownEmailException" use="literal"/></wsdl:fault>
+      <wsdl:fault name="UnknownInternalException"><soap:fault name="UnknownInternalException" use="literal"/></wsdl:fault>
+  </wsdl:operation>
+
+</wsdl:binding>
+
+<wsdl:service name="EndpointResolverService">
+  <wsdl:port name="EndpointResolverPort" binding="tns:EndpointResolverBinding">
+    <soap:address location="https://api-meta.postini.com/api2/endpointresolver"/>
+  </wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

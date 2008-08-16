@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-GEM_NAME = 'postini4r' # what ppl will type to install your gem
+GEM_NAME = 'postini' # what ppl will type to install your gem
 RUBYFORGE_PROJECT = 'postini4r'
 
 require 'rubygems'
@@ -17,7 +17,7 @@ require 'syntax/convertors/html'
 require 'erb'
 require File.dirname(__FILE__) + "/../lib/#{GEM_NAME}/version.rb"
 
-version  = Postini4r::VERSION::STRING
+version  = Postini::VERSION::STRING
 download = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 
 def rubyforge_project_id
