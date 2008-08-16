@@ -1,6 +1,6 @@
 require 'xsd/qname'
 
-module Postini; module WSDL; module EndpointResolver
+module Postini; module API; module EndpointResolver
 
 
 # {http://postini.com/PSTN/SOAPAPI/v2/endpointresolver}AdminBlockException
@@ -16,7 +16,7 @@ end
 # {http://postini.com/PSTN/SOAPAPI/v2/endpointresolver}GetServiceEndpoint
 #   apiKey - SOAP::SOAPString
 #   email - SOAP::SOAPString
-#   service - Postini::WSDL::EndpointResolver::Service
+#   service - Postini::API::EndpointResolver::Service
 class GetServiceEndpoint
   attr_accessor :apiKey
   attr_accessor :email

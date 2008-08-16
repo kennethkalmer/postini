@@ -1,6 +1,6 @@
 # See #Postini::Endpoint 
 
-require 'postini/wsdl/endpointresolver/EndpointResolverDriver'
+require 'postini/api/endpointresolver/EndpointResolverDriver'
 
 module Postini
   
@@ -20,11 +20,11 @@ module Postini
     module InstanceMethods
       
       # Return the endpoint URL for the user
-      def get_endpoint( user, service = Postini::WSDL::EndpointResolver::Service::V2AutomatedBatch )
+      def get_endpoint( user, service = Postini::API::EndpointResolver::Service::V2AutomatedBatch )
         # Only run if needed
         if @postini_end_point_uri.nil?
-          remote = Postini::WSDL::EndpointResolver::EndpointResolverPort.new
-          request = Postini::WSDL::EndpointResolver::GetServiceEndpoint.new(
+          remote = Postini::API::EndpointResolver::EndpointResolverPort.new
+          request = Postini::API::EndpointResolver::GetServiceEndpoint.new(
             Postini.api_key, user, service
           )
           response = remote.getServiceEndpoint( request )

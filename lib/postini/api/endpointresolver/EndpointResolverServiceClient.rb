@@ -2,7 +2,7 @@
 require File.dirname(__FILE__) + '/EndpointResolverDriver.rb'
 
 
-module Postini::WSDL::EndpointResolver
+module Postini::API::EndpointResolver
 
 endpoint_url = ARGV.shift
 obj = EndpointResolverPort.new(endpoint_url)
