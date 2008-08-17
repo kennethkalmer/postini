@@ -40,7 +40,9 @@ RDOC_OPTS = ['--quiet', '--title', 'postini documentation',
     "--opname", "index.html",
     "--line-numbers",
     "--main", "README",
-    "--inline-source"]
+    "--inline-source",
+    "--exclude", "*.wsdl"
+    ]
 
 class Hoe
   def extra_deps
@@ -64,8 +66,8 @@ $hoe = Hoe.new(GEM_NAME, VERS) do |p|
   p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   #p.extra_deps = EXTRA_DEPENDENCIES
 
-    #p.spec_extras = {}    # A hash of extra values to set in the gemspec.
-  end
+  #p.spec_extras = {}    # A hash of extra values to set in the gemspec.
+end
 
 CHANGES = $hoe.paragraphs_of('History.txt', 0..1).join("\\n\\n")
 PATH    = (RUBYFORGE_PROJECT == GEM_NAME) ? RUBYFORGE_PROJECT : "#{RUBYFORGE_PROJECT}/#{GEM_NAME}"
