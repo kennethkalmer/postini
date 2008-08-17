@@ -1,5 +1,3 @@
-# See #Postini::Domain
-
 require 'postini/api/automatedbatch/AutomatedBatchDriver'
 
 module Postini

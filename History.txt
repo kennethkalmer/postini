@@ -2,3 +2,5 @@
 
 * Initial release
   * Support for the Postini Endpoint Resolver API
+  * wsdl2ruby for the Automated Batch Service API
+  * RDoc's to help get around

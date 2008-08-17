@@ -1,6 +1,6 @@
 require 'xsd/qname'
 
-module Postini; module API; module EndpointResolver
+module Postini; module API; module EndpointResolver #:nodoc: all
 
 
 # {http://postini.com/PSTN/SOAPAPI/v2/endpointresolver}AdminBlockException

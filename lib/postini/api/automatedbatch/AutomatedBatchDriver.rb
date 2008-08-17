@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/AutomatedBatch.rb'
 require File.dirname(__FILE__) + '/AutomatedBatchMappingRegistry.rb'
 require 'soap/rpc/driver'
 
-module Postini::API::AutomatedBatch
+module Postini::API::AutomatedBatch #:nodoc: all
 
 class AutomatedBatchPort < ::SOAP::RPC::Driver
   Methods = [

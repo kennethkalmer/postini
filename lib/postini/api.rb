@@ -1,4 +1,3 @@
-# See #Postini::API
 module Postini
   
   # This module contains all the wsdl2ruby uglies and is not documented, since

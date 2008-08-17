@@ -1,5 +1,3 @@
-# See #Postini::User 
-
 module Postini
   
   # This class represents a user in the Postini systems.

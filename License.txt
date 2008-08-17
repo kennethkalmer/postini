@@ -1,5 +1,6 @@
-Copyright (c) 2008 Clear Planet Information Solutions (Pty) Ltd
-Copyright (c) 2008 ISP in a Box CC
+= LICENSE
+
+Copyright (c) 2008 Clear Planet Information Solutions (Pty) Ltd & ISP in a Box CC
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -19,3 +20,10 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+= TRADEMARKS
+
+Postini, the Postini Logo, Perimeter Manager, Security Manager, Network Edition,
+AirPostini, and Postini Message Platform are either registered trademarks or 
+trademarks of Postini Inc. Postini is a registered trademark of Postini, Inc.
+All other trademarks are the property of their respective holders.

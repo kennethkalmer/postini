@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/EndpointResolver.rb'
 require File.dirname(__FILE__) + '/EndpointResolverMappingRegistry.rb'
 require 'soap/rpc/driver'
 
-module Postini::API::EndpointResolver
+module Postini::API::EndpointResolver #:nodoc: all
 
 class EndpointResolverPort < ::SOAP::RPC::Driver
   DefaultEndpointUrl = "https://api-meta.postini.com/api2/endpointresolver"
