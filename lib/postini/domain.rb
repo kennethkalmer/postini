@@ -40,7 +40,6 @@ module Postini
       end
     end
     
-    # Returns true if this is a new domain
     def new?
       @id.nil?
     end
@@ -50,6 +49,8 @@ module Postini
     # added.
     def create
       return false unless new?
+      
+      # TODO: Add missing validations here
       
       remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
       args = Postini::API::AutomatedBatch::Adddomainargs.new( @name )
