@@ -5,6 +5,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 gem 'soap4r'
 require 'postini/user'
 require 'postini/domain'
+
 require 'postini/api/endpointresolver/EndpointResolverDriver'
 
 # This module just provides access to configuration details used by the rest of

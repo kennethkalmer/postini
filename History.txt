@@ -1,6 +1,13 @@
-== 0.0.1 Work in progress
+== 0.0.2 2008-08-19
+
+* Fixed broken code for adding new users, with the most basic of validations
+* Fixed broken code for removing existing users
+
+== 0.0.1 2008-08-18
 
 * Initial release
   * Support for the Postini Endpoint Resolver API
   * wsdl2ruby for the Automated Batch Service API
+  * (Very) Rough support for adding/removing users
+  * Support for adding/removing aliases
   * RDoc's to help get around

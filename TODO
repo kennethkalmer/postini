@@ -16,6 +16,7 @@ Add support for org management
 
 Support for lazy-loading:
   * Orgs users => user details
+  * Convert search results into fully useable objects
 
 Work out a nice set of class+instance method combinations. The API's aren't
 really geared for instance-level stuff. So User.destroy( address ) and 

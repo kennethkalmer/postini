@@ -18,6 +18,7 @@ module Postini
     class << self
       
       # Return a new instance of the user
+      # TODO: Make this take various options just like ActiveRecord
       def find( user )
         remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( user ) )
         request = Postini::API::AutomatedBatch::Displayuser.new( Postini.auth, user )
@@ -37,10 +38,11 @@ module Postini
       
       # Permanently remove the user from Postini
       def destroy( address )
-        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Potini.endpoint_uri( address ) )
-        request = Postini::API::AutmatedBatch::Deleteuser.new( Postini.auth, address )
+        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( address ) )
+        request = Postini::API::AutomatedBatch::Deleteuser.new( Postini.auth, address )
         remote.deleteuser( request )
       end
+      
     end
     
     # Setup a new instance with the combination of attributes set
@@ -54,15 +56,17 @@ module Postini
       @id.nil?
     end
     
-    # Create the new user.
-    # TODO: Add support for sending a welcome message and assigning to an org
-    def create
+    # Create the new user. Pass +welcome+ as '1' to have a welcome mail sent
+    # to the user. The org for the user will be pulled from the org attribute
+    def create( welcome = 0 )
       return false unless new?
       
       # TODO: Add missing validations here
+      return false if @address.nil? || @org.nil?
       
       remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
-      request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @address )
+      args = Postini::API::AutomatedBatch::Adduserargs.new( @org, welcome )
+      request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @address, args )
       remote.adduser( request )
     end
     
