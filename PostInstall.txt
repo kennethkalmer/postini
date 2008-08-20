@@ -1,7 +1,8 @@
 
-For more information on postini4r, see http://postini4r.rubyforge.org
+For more information on postini4r's postini gem, see 
+http://postini4r.rubyforge.org/postini
 
-NOTE: Change this information in PostInstall.txt 
-You can also delete it if you don't want it.
-
+Remember to contact your Postini provider, or Postini directly, to gain access
+to the Postini Early Access Program. You'll need a unique API key to make use
+of this gem.
 

@@ -20,7 +20,7 @@ module Postini
       # Return a new instance of the user
       # TODO: Make this take various options just like ActiveRecord
       def find( user )
-        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( user ) )
+        remote = automated_batch_port( user )
         request = Postini::API::AutomatedBatch::Displayuser.new( Postini.auth, user )
         response = remote.displayuser( request )
         user_record = response.userRecord
@@ -38,9 +38,17 @@ module Postini
       
       # Permanently remove the user from Postini
       def destroy( address )
-        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( address ) )
+        remote = automated_batch_port( address )
         request = Postini::API::AutomatedBatch::Deleteuser.new( Postini.auth, address )
         remote.deleteuser( request )
+      end
+      
+      private
+      
+      def automated_batch_port( address = nil )
+        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( address ) )
+        remote.wiredump_dev = Postini.soap4r_wiredump_dev if Postini.soap4r_wiredump?
+        remote
       end
       
     end
@@ -64,7 +72,7 @@ module Postini
       # TODO: Add missing validations here
       return false if @address.nil? || @org.nil?
       
-      remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
+      remote = automated_batch_port
       args = Postini::API::AutomatedBatch::Adduserargs.new( @org, welcome )
       request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @address, args )
       remote.adduser( request )
@@ -80,7 +88,7 @@ module Postini
     # Return the list of aliases for the mailbox
     def aliases
       if @aliases.nil?
-        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( @address ) )
+        remote = self.class.automated_batch_port( @address )
         query = Postini::API::AutomatedBatch::ListusersqueryParams.new
         query.aliases = 1
         query.childorgs = 1
@@ -104,7 +112,7 @@ module Postini
     # Add an alias to this user
     def add_alias( address )
       @aliases = nil # clear our cache
-      remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( @address ) )
+      remote = self.class.automated_batch_port( @address )
       request = Postini::API::AutomatedBatch::Addalias.new( Postini.auth, @address, address )
       remote.addalias( request )
     end
@@ -112,7 +120,7 @@ module Postini
     # Removes the specified alias
     def remove_alias( address )
       @aliases = nil # clear our cache
-      remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( @address ) )
+      remote = self.class.automated_batch_port( @address )
       request = Postini::API::AutomatedBatch::Deletealias.new( Postini.auth, address )
       remote.deletealias( request )
     end

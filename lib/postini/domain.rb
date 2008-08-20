@@ -13,7 +13,7 @@ module Postini
       
       # Return an instance of #Domain with all the attributes populated
       def find( domain )
-        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
+        remote = automated_batch_port
         request = Postini::API::AutomatedBatch::Displaydomain.new( Postini.auth, domain )
         response = remote.displaydomain( request )
         domain_record = response.domainRecord
@@ -31,6 +31,13 @@ module Postini
         )
       end
       
+      private
+      
+      def automated_batch_port
+        remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
+        remote.wiredump_dev = Postini.soap4r_wiredump_dev if Postini.soap4r_wiredump?
+        remote
+      end
     end
     
     # Setup a new instance with the combination of attributes set
@@ -50,9 +57,10 @@ module Postini
     def create
       return false unless new?
       
-      # TODO: Add missing validations here
+      # TODO: Add improved validations here
+      return false if @name.nil? || @org.nil?
       
-      remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
+      remote = automated_batch_port
       args = Postini::API::AutomatedBatch::Adddomainargs.new( @name )
       request = Postini::API::AutomatedBatch::Adddomain.new(
         Postini.auth, @org, args

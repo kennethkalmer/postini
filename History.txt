@@ -1,3 +1,8 @@
+== 0.0.3 2008-08-21
+
+* Added options to allow for the capturing of soap4r wiredumps
+* Added missing validations to domain creation
+
 == 0.0.2 2008-08-19
 
 * Fixed broken code for adding new users, with the most basic of validations
