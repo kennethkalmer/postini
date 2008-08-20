@@ -31,9 +31,8 @@ module Postini
         )
       end
       
-      private
-      
-      def automated_batch_port
+      # Return a remote port with debug enabled if required
+      def automated_batch_port #:nodoc:
         remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
         remote.wiredump_dev = Postini.soap4r_wiredump_dev if Postini.soap4r_wiredump?
         remote

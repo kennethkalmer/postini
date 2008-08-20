@@ -65,7 +65,7 @@ module Postini
   # On the fly class variable, getter and setter generation...
   %w{ 
     api_key system_number username password xauth
-    logger debug soap4r_debug soap4r_debug_dev soap4r_wiredump soap4r_wiredump_dev
+    logger debug soap4r_wiredump soap4r_wiredump_dev
   }.each do |config|
     class_eval <<-EOF
       @@#{config} = nil
@@ -134,7 +134,7 @@ module Postini
     end
     
     def soap4r_wiredump_dev
-      @@soap4r_wiredump_dev ||= soap4r_debug_dev
+      @@soap4r_wiredump_dev ||= logger
     end
     
   end

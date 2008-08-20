@@ -43,9 +43,8 @@ module Postini
         remote.deleteuser( request )
       end
       
-      private
-      
-      def automated_batch_port( address = nil )
+      # Return a remote port for the address, with debug enabled if required
+      def automated_batch_port( address = nil ) #:nodoc:
         remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri( address ) )
         remote.wiredump_dev = Postini.soap4r_wiredump_dev if Postini.soap4r_wiredump?
         remote
