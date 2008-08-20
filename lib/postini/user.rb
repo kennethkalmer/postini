@@ -69,10 +69,10 @@ module Postini
       return false unless new?
       
       # TODO: Add missing validations here
-      return false if @address.nil? || @org.nil?
+      return false if @address.nil? || @orgid.nil?
       
-      remote = automated_batch_port
-      args = Postini::API::AutomatedBatch::Adduserargs.new( @org, welcome )
+      remote = self.class.automated_batch_port
+      args = Postini::API::AutomatedBatch::Adduserargs.new( @orgid, welcome )
       request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @address, args )
       remote.adduser( request )
     end
