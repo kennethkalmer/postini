@@ -131,6 +131,11 @@ pre, code {
 	background-color: #B3ABFF;
 }
 
+#version img {
+    margin-right: 15px;
+    border: 0;
+}
+
 .clickable {
 	cursor:	pointer; 
 	cursor:	hand;
