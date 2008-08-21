@@ -59,7 +59,7 @@ module Postini
       # TODO: Add improved validations here
       return false if @name.nil? || @org.nil?
       
-      remote = automated_batch_port
+      remote = self.class.automated_batch_port
       args = Postini::API::AutomatedBatch::Adddomainargs.new( @name )
       request = Postini::API::AutomatedBatch::Adddomain.new(
         Postini.auth, @org, args
