@@ -27,4 +27,32 @@ describe "Postini master module" do
     Postini.xauth.should eql('format_unknown_to_author')
   end
   
+  it "should return a pre-built URI if no user is provided" do
+    Postini.system_number = 0
+    Postini.endpoint_uri.should eql('https://api-s0.postini.com/api2/automatedbatch')
+  end
+  
+  it "should use the Endpoint Resolver service if a user is provided" do
+    mock_remote = Postini::API::EndpointResolver::EndpointResolverPort.new
+    mock_remote.expects( :getServiceEndpoint ).with(anything).returns(
+      OpenStruct.new( :endpointURI => 'https://api-s0.postini.com/api2/automatedbatch' )
+    )
+    Postini::API::EndpointResolver::EndpointResolverPort.expects(:new).returns(mock_remote)
+    
+    Postini.endpoint_uri( 'support@jumboinc.com' ).should eql('https://api-s0.postini.com/api2/automatedbatch')
+    
+    pending "IMPROVE"
+  end
+  
+  it "should generate auth elements without user details" do
+    pending
+  end
+  
+  it "should generate auth elements with username and passwords" do
+    pending
+  end
+  
+  it "should generate auth elements with usernames and xauth strings" do
+    pending
+  end
 end
