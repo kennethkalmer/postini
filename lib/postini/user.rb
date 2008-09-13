@@ -1,4 +1,5 @@
 require 'postini/api/automatedbatch/AutomatedBatchDriver'
+require 'postini/users/aliases'
 
 module Postini
   
@@ -7,13 +8,22 @@ module Postini
   # TODO: Expand documentation
   class User
     
-    attr_accessor :id, :active, :address, :approved_recipients, 
-      :approved_senders, :blocked_senders, :create_method, :created_date,
-      :filter_adult, :filter_bulk, :filter_getrich, :filter_offers, 
-      :filter_racial, :initial_password, :junkmail_filter, :lang_locale,
-      :lastmod_date, :message_encryption, :message_limit, :message_limited,
-      :message_count, :notice_address, :orgid, :password, :timezone, 
-      :virus_notify, :virus_state, :weblocked, :welcome_count, :wireless_state
+    include Helpers::Attributes
+    
+    has_attributes :id, :message_count, :message_limit, :orgid, :create_method,
+      :virus_notify, :type => :int
+    has_attributes :active, :junkmail_filter, :message_encryption, 
+      :message_limited, :virus_state, :weblocked, :welcome_count, 
+      :wireless_state, :type => :bool
+    has_attributes :address, :notice_address, :initial_password, :password,
+      :lang_locale, :timezone, :orgtag, :ext_encrypt
+    has_attributes :approved_recipients, :approved_senders, :blocked_senders, 
+      :type => :array
+    has_attributes :created_date, :lastmod_date, :type => :timestamp
+    has_attributes :filter_adult, :filter_bulk, :filter_getrich, 
+      :filter_offers, :filter_racial, :type => :filter
+    
+    include Users::Aliases
     
     class << self
       
@@ -52,15 +62,8 @@ module Postini
       
     end
     
-    # Setup a new instance with the combination of attributes set
-    def initialize( attributes = {} )
-      attributes.each_pair do |k,v|
-        instance_variable_set "@#{k.to_s}", v
-      end
-    end
-    
     def new?
-      @id.nil?
+      self.id.nil?
     end
     
     # Create the new user. Pass +welcome+ as '1' to have a welcome mail sent
@@ -69,11 +72,11 @@ module Postini
       return false unless new?
       
       # TODO: Add missing validations here
-      return false if @address.nil? || @orgid.nil?
+      return false if self.address.nil? || self.orgid.nil?
       
       remote = self.class.automated_batch_port
-      args = Postini::API::AutomatedBatch::Adduserargs.new( @orgid, welcome )
-      request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @address, args )
+      args = Postini::API::AutomatedBatch::Adduserargs.new( self.orgid, welcome )
+      request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, self.address, args )
       remote.adduser( request )
     end
     
@@ -81,54 +84,8 @@ module Postini
     def destroy
       return false if new?
       
-      self.class.destroy( @address )
+      self.class.destroy( self.address )
     end
     
-    # Return the list of aliases for the mailbox
-    def aliases
-      if @aliases.nil?
-        remote = self.class.automated_batch_port( @address )
-        query = Postini::API::AutomatedBatch::ListusersqueryParams.new
-        query.aliases = 1
-        query.childorgs = 1
-        query.primaryqs = @address
-        query.targetOrg = @orgid
-        request = Postini::API::AutomatedBatch::Listusers.new(
-          Postini.auth,
-          "ALL",
-          query
-        )
-        
-        response = remote.listusers( request )
-        
-        @aliases = []
-        response.each { |user_record| @aliases << user_record.address }
-      end
-      
-      @aliases
-    end
-    
-    # Add an alias to this user
-    def add_alias( address )
-      @aliases = nil # clear our cache
-      remote = self.class.automated_batch_port( @address )
-      request = Postini::API::AutomatedBatch::Addalias.new( Postini.auth, @address, address )
-      remote.addalias( request )
-    end
-    
-    # Removes the specified alias
-    def remove_alias( address )
-      @aliases = nil # clear our cache
-      remote = self.class.automated_batch_port( @address )
-      request = Postini::API::AutomatedBatch::Deletealias.new( Postini.auth, address )
-      remote.deletealias( request )
-    end
-    
-    # Removes all aliases from the user
-    def clear_aliases
-      aliases.each do |address|
-        remove_alias( address )
-      end
-    end
   end
 end

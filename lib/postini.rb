@@ -2,7 +2,9 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 # requirements
-gem 'soap4r'
+gem 'soap4r', '=1.5.8'
+gem 'activesupport', '=2.1'
+require 'postini/helpers'
 require 'postini/user'
 require 'postini/domain'
 
