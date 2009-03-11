@@ -2,8 +2,11 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 # requirements
+require 'rubygems'
 gem 'soap4r', '=1.5.8'
-gem 'activesupport', '=2.1'
+unless defined?( ActiveSupport )
+  gem 'activesupport', '>=2.1'
+end
 require 'postini/helpers'
 require 'postini/user'
 require 'postini/domain'

@@ -18,13 +18,17 @@ lib/postini/api/endpointresolver/EndpointResolverDriver.rb
 lib/postini/api/endpointresolver/EndpointResolverMappingRegistry.rb
 lib/postini/api/endpointresolver/EndpointResolverServiceClient.rb
 lib/postini/domain.rb
+lib/postini/helpers.rb
+lib/postini/helpers/attributes.rb
 lib/postini/user.rb
+lib/postini/users/aliases.rb
 lib/postini/version.rb
 script/console
 script/destroy
 script/generate
 script/txt2html
 setup.rb
+spec/attribute_helper_spec.rb
 spec/domain_spec.rb
 spec/postini_spec.rb
 spec/spec.opts
