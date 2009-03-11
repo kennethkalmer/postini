@@ -8,7 +8,7 @@ RUBYFORGE_PROJECT = 'postini4r' # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 EXTRA_DEPENDENCIES = [
-  ['activesupport', '=2.1'],
+  ['activesupport', '>=2.1'],
   ['soap4r', '=1.5.8']
 ]    # An array of rubygem dependencies [name, version]
 
