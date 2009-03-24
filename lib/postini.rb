@@ -5,7 +5,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'rubygems'
 gem 'soap4r', '=1.5.8'
 unless defined?( ActiveSupport )
-  gem 'activesupport', '>=2.1'
+  gem 'activesupport', '>=2.0.2'
 end
 require 'postini/helpers'
 require 'postini/user'
