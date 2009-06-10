@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
 describe Postini::User do
-  
+
   before(:each) do
     Postini.stubs(:endpoint_uri).with(anything).returns('http://example.com/api2/automatedbatch')
     Postini.stubs(:auth).with(anything).returns(
@@ -10,7 +10,7 @@ describe Postini::User do
       )
     )
   end
-  
+
   describe "provides convenience methods" do
     it "load a user" do
       address = 'support@jumboinc.com'
@@ -45,7 +45,7 @@ describe Postini::User do
       Postini::User.expects(:automated_batch_port).with(address).returns(mock_remote)
 
       Postini::User.destroy(address)
-      
+
       pending "IMPROVE"
     end
   end
@@ -72,20 +72,62 @@ describe Postini::User do
     it "should be created if valid" do
       @user.address = 'support@jumboinc.com'
       @user.orgid = 'support'
-      
+
       mock_args = Postini::API::AutomatedBatch::Adduserargs.new( @user.orgid, 0 )
       Postini::API::AutomatedBatch::Adduserargs.expects(:new).with( @user.orgid, 0 ).returns(mock_args)
-      
+
       mock_request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @user.address, mock_args )
       Postini::API::AutomatedBatch::Adduser.expects(:new).with( Postini.auth, @user.address, mock_args ).returns(mock_request)
-      
+
       mock_remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
       Postini::User.expects(:automated_batch_port).returns(mock_remote)
       mock_remote.expects(:adduser).with(mock_request)
-      
+
       ####
-      
+
       @user.create
+    end
+
+    it "should raise a DuplicateAddress exception if there is an address clash" do
+      @user.address = 'support@jumboinc.com'
+      @user.orgid = 'support'
+
+      mock_args = Postini::API::AutomatedBatch::Adduserargs.new( @user.orgid, 0 )
+      Postini::API::AutomatedBatch::Adduserargs.expects(:new).with( @user.orgid, 0 ).returns(mock_args)
+
+      mock_request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @user.address, mock_args )
+      Postini::API::AutomatedBatch::Adduser.expects(:new).with( Postini.auth, @user.address, mock_args ).returns(mock_request)
+
+      mock_exception = Postini::API::AutomatedBatch::BatchException.new("Batch:  code:general, message: 'support@jumboinc.com' clashes with an existing address or alias. () (Request ID 8A05EFFE-54CA-11DE-AA33-21D18BBA2E9A)")
+
+      mock_remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
+      Postini::User.expects(:automated_batch_port).returns(mock_remote)
+      mock_remote.expects(:adduser).with(mock_request).raises(mock_exception)
+
+      lambda {
+        @user.create
+      }.should raise_error( Postini::DuplicateAddress )
+    end
+
+    it "should raise a UnknownDomain exception if the domain is now known" do
+      @user.address = 'support@jumboinc.com'
+      @user.orgid = 'support'
+
+      mock_args = Postini::API::AutomatedBatch::Adduserargs.new( @user.orgid, 0 )
+      Postini::API::AutomatedBatch::Adduserargs.expects(:new).with( @user.orgid, 0 ).returns(mock_args)
+
+      mock_request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @user.address, mock_args )
+      Postini::API::AutomatedBatch::Adduser.expects(:new).with( Postini.auth, @user.address, mock_args ).returns(mock_request)
+
+      mock_exception = Postini::API::AutomatedBatch::BatchException.new("Batch:  code:general, message: No domain record exists for support@jumboinc.com. The domain must be added before users or user aliases can be added. () (Request ID 782FEDC0-540C-11DE-974E-476458F28762)")
+
+      mock_remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
+      Postini::User.expects(:automated_batch_port).returns(mock_remote)
+      mock_remote.expects(:adduser).with(mock_request).raises(mock_exception)
+
+      lambda {
+        @user.create
+      }.should raise_error( Postini::UnknownDomain )
     end
   end
 
@@ -121,20 +163,20 @@ describe Postini::User do
       mock_remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri(@user.address) )
       Postini::User.expects(:automated_batch_port).with(@user.address).returns(mock_remote)
       mock_remote.expects(:listusers).with(anything).returns([])
-      
+
       @user.aliases.should be_empty
-      
+
       pending "IMPROVE"
     end
-    
+
     it "can be added to" do
       pending
     end
-    
+
     it "can be removed" do
       pending
     end
-    
+
     it "can be cleared" do
       pending
     end
