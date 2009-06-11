@@ -1,4 +1,6 @@
 module Postini
+
+  # Parent class of our exception hierarchy
   class Error < ::StandardError
   end
 
@@ -6,5 +8,9 @@ module Postini
   end
 
   class UnknownDomain < Error
+  end
+
+  # Raised if the #Postini library is not sufficiently configured.
+  class NotConfigured < Error
   end
 end

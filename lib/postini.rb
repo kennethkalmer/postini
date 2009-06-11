@@ -3,6 +3,8 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 # requirements
 require 'rubygems'
+require 'handsoap'
+
 gem 'soap4r', '=1.5.8'
 unless defined?( ActiveSupport )
   gem 'activesupport', '>=2.0.2'
@@ -11,8 +13,6 @@ require 'postini/helpers'
 require 'postini/user'
 require 'postini/domain'
 require 'postini/exceptions'
-
-require 'postini/api/endpointresolver/EndpointResolverDriver'
 
 # = Configuration
 #
@@ -24,7 +24,6 @@ require 'postini/api/endpointresolver/EndpointResolverDriver'
 # * system_number
 # * username
 # * password
-# * xauth
 #
 # The +api_key+ is your unique API keys obtained from Postini via their Early
 # Access program.
@@ -41,16 +40,17 @@ require 'postini/api/endpointresolver/EndpointResolverDriver'
 # The +username+ parameter is required if:
 # 1. Your org is using POP authentication, and thus needs the admin user's
 # authentication details, not the end-user's.
-# 2. You omit the optional username and password/xauth string for the request
+# 2. You omit the optional username and password string for the request
 #
 #   Postini.username = 'administrat@jumboinc.com'
 #
-# The +password+ and +xauth+ parameters are mutually exclusive, and cannot be
-# used together. This library will use the +password+ if present, ignoring the
-# +xauth+ string alltogether.
+# The +password+ parameter is require if:
+# 1. Your org is using POP authentication, and thus needs the admin
+# user's authentication details, not the end-users's.
+# 2. You can omit the optional username and password arguments for a
+# specific request.
 #
 #   Postini.password = 'secret'
-#   Postini.xauth = 'format_unknown_to_author'
 #
 # = Debugging
 #
@@ -59,8 +59,6 @@ require 'postini/api/endpointresolver/EndpointResolverDriver'
 #
 # * logger = Ruby-logger compatibe logger
 # * debug = true/false - Enable more verbose logging
-# * soap4r_wiredump = true/false - Enable soap4r wiredumps
-# * soap4r_wiredump_dev = DEV - Alternative logfile or device for SOAP4R wiredumps
 #
 # Specify a 'Logger' compatible logging facility in order to use the debug
 # features of the gem. All the other settings increase the verbosity to varying
@@ -68,50 +66,27 @@ require 'postini/api/endpointresolver/EndpointResolverDriver'
 #
 module Postini
   VERSION = "0.1.0"
-  
-  # On the fly class variable, getter and setter generation...
-  %w{
-    api_key system_number username password xauth
-    logger debug soap4r_wiredump soap4r_wiredump_dev
-  }.each do |config|
-    class_eval <<-EOF
-      @@#{config} = nil
-      def self.#{config}=( val )
-        @@#{config} = val
-      end
-      def self.#{config}
-        @@#{config}
-      end
-    EOF
-  end
+
+  autoload :ConfigurationCheck,      "postini/configuration_check"
+  autoload :Endpoints,               "postini/endpoints"
+  autoload :EndpointResolverService, "postini/endpoint_resolver_service"
+
+  # Don't debug by default
+  @debug = false
 
   class << self
 
-    # Return the appropriate endpoint URI for the service calls. If +user+ is
-    # provided, the endpoint is determined using the Endpoint Resolver Service,
-    # otherwise it is contructed from the +system_number+ configuration value.
-    def endpoint_uri( user = nil, service = :automated_batch )
-      raise "System Number not known" if user.nil? && system_number.nil?
+    attr_accessor :api_key, :system_number, :username, :password, :debug, :logger
 
-      # Translate the service
-      service = case service
-      when :automated_batch
-        [ Postini::API::EndpointResolver::Service::V2AutomatedBatch, "automatedbatch" ]
-      end
-
-      if user.nil?
-        "https://api-s#{system_number}.postini.com/api2/#{service[1]}"
-      else
-        remote = Postini::API::EndpointResolver::EndpointResolverPort.new
-        remote.wiredump_dev = soap4r_wiredump_dev if soap4r_wiredump?
-
-        request = Postini::API::EndpointResolver::GetServiceEndpoint.new(
-          api_key, user, service[0]
-        )
-        response = remote.getServiceEndpoint( request )
-        response.endpointURI
-      end
+    def configured? #:nodoc:
+      !self.api_key.nil? &&
+        !self.system_number.nil? &&
+        !self.username.nil? &&
+        !self.password.nil?
     end
+  end
+
+  class << self
 
     def auth( service = :automated_batch, username = nil, password = nil, xauth = nil )
       username ||= self.username
@@ -126,22 +101,6 @@ module Postini
           api_key, username, password, xauth
         )
       end
-    end
-
-    def debug?
-      @@debug ||= false
-    end
-
-    def soap4r_wiredump?
-      @@soap4r_wiredump ||= false
-    end
-
-    def logger
-      @@logger ||= Logger.new('/dev/null')
-    end
-
-    def soap4r_wiredump_dev
-      @@soap4r_wiredump_dev ||= logger
     end
 
   end
