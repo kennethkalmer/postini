@@ -18,6 +18,7 @@ lib/postini/api/endpointresolver/EndpointResolverDriver.rb
 lib/postini/api/endpointresolver/EndpointResolverMappingRegistry.rb
 lib/postini/api/endpointresolver/EndpointResolverServiceClient.rb
 lib/postini/domain.rb
+lib/postini/exceptions.rb
 lib/postini/helpers.rb
 lib/postini/helpers/attributes.rb
 lib/postini/user.rb

@@ -80,7 +80,7 @@ module Postini
 
       begin
         remote.adduser( request )
-      rescue Postini::API::AutomatedBatch::BatchException => e
+      rescue SOAP::FaultError => e
         if e.message =~ /clashes with an existing address or alias/
           raise DuplicateAddress, e.message
         elsif e.message =~ /The domain must be added before users or user aliases can be added/

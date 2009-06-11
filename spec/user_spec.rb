@@ -98,7 +98,7 @@ describe Postini::User do
       mock_request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @user.address, mock_args )
       Postini::API::AutomatedBatch::Adduser.expects(:new).with( Postini.auth, @user.address, mock_args ).returns(mock_request)
 
-      mock_exception = Postini::API::AutomatedBatch::BatchException.new("Batch:  code:general, message: 'support@jumboinc.com' clashes with an existing address or alias. () (Request ID 8A05EFFE-54CA-11DE-AA33-21D18BBA2E9A)")
+      mock_exception = SOAP::FaultError.new(1,"Batch:  code:general, message: 'support@jumboinc.com' clashes with an existing address or alias. () (Request ID 8A05EFFE-54CA-11DE-AA33-21D18BBA2E9A)")
 
       mock_remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
       Postini::User.expects(:automated_batch_port).returns(mock_remote)
@@ -119,7 +119,7 @@ describe Postini::User do
       mock_request = Postini::API::AutomatedBatch::Adduser.new( Postini.auth, @user.address, mock_args )
       Postini::API::AutomatedBatch::Adduser.expects(:new).with( Postini.auth, @user.address, mock_args ).returns(mock_request)
 
-      mock_exception = Postini::API::AutomatedBatch::BatchException.new("Batch:  code:general, message: No domain record exists for support@jumboinc.com. The domain must be added before users or user aliases can be added. () (Request ID 782FEDC0-540C-11DE-974E-476458F28762)")
+      mock_exception = SOAP::FaultError.new(1,"Batch:  code:general, message: No domain record exists for support@jumboinc.com. The domain must be added before users or user aliases can be added. () (Request ID 782FEDC0-540C-11DE-974E-476458F28762)")
 
       mock_remote = Postini::API::AutomatedBatch::AutomatedBatchPort.new( Postini.endpoint_uri )
       Postini::User.expects(:automated_batch_port).returns(mock_remote)
