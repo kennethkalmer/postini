@@ -5,8 +5,11 @@ PostInstall.txt
 README.txt
 Rakefile
 TODO
-config/hoe.rb
-config/requirements.rb
+features/development.feature
+features/step_definitions/common_steps.rb
+features/support/common.rb
+features/support/env.rb
+features/support/matchers.rb
 lib/postini.rb
 lib/postini/api.rb
 lib/postini/api/automatedbatch/AutomatedBatch.rb
@@ -32,6 +35,7 @@ setup.rb
 spec/attribute_helper_spec.rb
 spec/domain_spec.rb
 spec/postini_spec.rb
+spec/rcov.opts
 spec/spec.opts
 spec/spec_helper.rb
 spec/user_spec.rb
@@ -41,9 +45,3 @@ tasks/rspec.rake
 tasks/website.rake
 vendor/automatedbatch.wsdl
 vendor/endpointresolver.wsdl
-website/index.html
-website/index.txt
-website/javascripts/rounded_corners_lite.inc.js
-website/spam_box.png
-website/stylesheets/screen.css
-website/template.html.erb

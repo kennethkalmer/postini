@@ -67,7 +67,8 @@ require 'postini/api/endpointresolver/EndpointResolverDriver'
 # degrees, and allow you to access some soap4r internals as well.
 #
 module Postini
-
+  VERSION = "0.1.0"
+  
   # On the fly class variable, getter and setter generation...
   %w{
     api_key system_number username password xauth
