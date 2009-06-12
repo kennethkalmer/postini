@@ -13,20 +13,27 @@ Rubyisms.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Built on top of handsoap[http://github.com/troelskn/handsoap], to
+  provide a lite hash-based interface to an otherwise crap API.
 
 == SYNOPSIS:
 
-  FIX
+  Postini.api_key = 'your api key'
+  Postini.username = 'administrative username'
+  Postini.password = 'administrative password'
+  Postini.system_number = 8
+
+  Postini::AutomatedBatchService.test
 
 == REQUIREMENTS:
 
 * Approved access to the Postini Early Access Program (contact your Postini
   provider)
-* soap4r
+* handsoap[http://github.com/troelskn/handsoap]
 
 == INSTALL:
 
+* sudo gem install troelskn-handsoap --source http://gems.github.com
 * sudo gem install postini
 
 == TRADEMARKS:
