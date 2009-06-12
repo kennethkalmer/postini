@@ -5,9 +5,6 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'rubygems'
 require 'handsoap'
 
-require 'postini/helpers'
-require 'postini/user'
-require 'postini/domain'
 require 'postini/exceptions'
 
 # = Configuration
@@ -119,24 +116,4 @@ module Postini
       end
     end
   end
-
-  class << self
-
-    def auth( service = :automated_batch, username = nil, password = nil, xauth = nil )
-      username ||= self.username
-      password ||= self.password
-      if password.nil?
-        xauth ||= self.xauth
-      end
-
-      case service
-      when :automated_batch
-        API::AutomatedBatch::AuthElem.new(
-          api_key, username, password, xauth
-        )
-      end
-    end
-
-  end
-
 end
