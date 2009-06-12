@@ -11,11 +11,6 @@ features/support/common.rb
 features/support/env.rb
 features/support/matchers.rb
 lib/postini.rb
-lib/postini/api.rb
-lib/postini/api/automatedbatch/AutomatedBatch.rb
-lib/postini/api/automatedbatch/AutomatedBatchDriver.rb
-lib/postini/api/automatedbatch/AutomatedBatchMappingRegistry.rb
-lib/postini/api/automatedbatch/AutomatedBatchServiceClient.rb
 lib/postini/domain.rb
 lib/postini/exceptions.rb
 lib/postini/helpers.rb

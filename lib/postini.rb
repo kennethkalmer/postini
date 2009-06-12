@@ -5,10 +5,6 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'rubygems'
 require 'handsoap'
 
-gem 'soap4r', '=1.5.8'
-unless defined?( ActiveSupport )
-  gem 'activesupport', '>=2.0.2'
-end
 require 'postini/helpers'
 require 'postini/user'
 require 'postini/domain'
@@ -88,6 +84,7 @@ module Postini
   autoload :ConfigurationCheck,      "postini/configuration_check"
   autoload :Endpoints,               "postini/endpoints"
   autoload :EndpointResolverService, "postini/endpoint_resolver_service"
+  autoload :AutomatedBatchService,   "postini/automated_batch_service"
 
   # Don't debug by default
   @debug = false
