@@ -9,7 +9,7 @@ require 'postini/exceptions'
 
 # = Configuration
 #
-#  This module just provides access to configuration details used by the rest of
+# This module just provides access to configuration details used by the rest of
 # the gem.
 #
 # Current configuration values are:
