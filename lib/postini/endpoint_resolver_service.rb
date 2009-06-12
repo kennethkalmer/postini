@@ -1,9 +1,9 @@
 module Postini
   class EndpointResolverService < Handsoap::Service
-    
+
     include ConfigurationCheck
-    
-    endpoint Postini::Endpoints::RESOLVER
+
+    endpoint Postini::Endpoints.resolver
 
     on_create_document do |doc|
       doc.alias 'end', 'https://api-meta.postini.com/api2/endpointresolver'

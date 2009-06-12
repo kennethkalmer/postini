@@ -52,6 +52,24 @@ require 'postini/exceptions'
 #
 #   Postini.password = 'secret'
 #
+# All of the above configurations can either be preloaded from a yaml
+# file or environment variables. Create a yaml file with the following
+# structure:
+#
+#   api_key:
+#   system_number:
+#   username:
+#   password:
+#
+# And call +Postini.configure!('/path/to/file.yml')+ to load the
+# values. Alternatively you can set the following environment variables
+# and call +Postini.configure!+ without a path.
+#
+#   POSTINI_API_KEY
+#   POSTINI_SYSTEM_NUMBER
+#   POSTINI_USERNAME
+#   POSTINI_PASSWORD
+#
 # = Debugging
 #
 # Lots to debug when an API is classified as "Early access", here are different
@@ -83,6 +101,25 @@ module Postini
         !self.system_number.nil? &&
         !self.username.nil? &&
         !self.password.nil?
+    end
+
+    # Configure the library from yaml configuration file or
+    # environment variables
+    def configure!( yaml = nil )
+      data = if yaml
+               YAML.load_file( yaml )
+             else
+               {
+                 'api_key' => ENV['POSTINI_API_KEY'],
+                 'system_number' => ENV['POSTINI_SYSTEM_NUMBER'],
+                 'username' => ENV['POSTINI_USERNAME'],
+                 'password' => ENV['POSTINI_PASSWORD']
+               }
+             end
+
+      data.each do |k,v|
+        self.send( "#{k}=", v )
+      end
     end
   end
 

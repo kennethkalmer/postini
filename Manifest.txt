@@ -16,10 +16,6 @@ lib/postini/api/automatedbatch/AutomatedBatch.rb
 lib/postini/api/automatedbatch/AutomatedBatchDriver.rb
 lib/postini/api/automatedbatch/AutomatedBatchMappingRegistry.rb
 lib/postini/api/automatedbatch/AutomatedBatchServiceClient.rb
-lib/postini/api/endpointresolver/EndpointResolver.rb
-lib/postini/api/endpointresolver/EndpointResolverDriver.rb
-lib/postini/api/endpointresolver/EndpointResolverMappingRegistry.rb
-lib/postini/api/endpointresolver/EndpointResolverServiceClient.rb
 lib/postini/domain.rb
 lib/postini/exceptions.rb
 lib/postini/helpers.rb
@@ -34,6 +30,7 @@ script/txt2html
 setup.rb
 spec/attribute_helper_spec.rb
 spec/domain_spec.rb
+spec/exceptions_spec.rb
 spec/postini_spec.rb
 spec/rcov.opts
 spec/spec.opts
