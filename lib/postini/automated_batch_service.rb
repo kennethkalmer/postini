@@ -202,6 +202,59 @@ module Postini
     end
     requires_configured :display_user
 
+    # Return a list of users, possibly filtered and sorted. Refer to
+    # the Postini Automated Batch Service Manual for an explanation of
+    # each field.
+    #
+    # Possible options are:
+    #
+    # :aliases => boolean
+    # :childorgs => boolean
+    # :start => integer
+    # :end => integer
+    # :fields => array (strings)
+    # :orgtagqs => string
+    # :primaryqs => string
+    # :targetOrg => string
+    # :type_of_user => string
+    #
+    # The call returns a giant hash, keys are the addresses returned
+    # by the operation, and the values are hashes of key-value pairs
+    # are returned by the remote service.
+    def list_users( query_string = 'ALL', options = {} )
+
+      valid_options = {}
+
+      # vanilla copies
+      [ :start, :end, :orgtagqs, :primaryqs, :targetOrg, :type_of_user ].each do |k|
+
+        valid_options[k] = options[k] if options.has_key?(k)
+      end
+
+      # boolean copies
+      [ :aliases, :childorgs ].each do |k|
+
+        if options.has_key?(k)
+          valid_options[k] = ( options[k] == true ? '1' : '0' )
+        end
+      end
+
+      valid_options[:fields] = options[:fields].join('|') if options.has_key?(:fields)
+
+      response = invoke("aut:listusers") do |message|
+        build_auth!( message )
+        message.add('queryString', query_string)
+        message.add('queryParams') do |q|
+          valid_options.each do |k,v|
+            q.add( k.to_s, v )
+          end
+        end
+      end
+
+      parse_list_users_results( response.document.xpath('//tns:listusersResponse', tns).first )
+    end
+    requires_configured :list_users
+
     # Modify a domain by moving it to a new organization, setting or
     # removing aliases, or enabling/disabling subdomain
     # stripping. Changes are passed as a hash with the following keys:
@@ -457,6 +510,39 @@ module Postini
         :welcome_count => node.xpath('./userRecord/welcome_count/text()').to_s.to_i,
         :wireless_state => node.xpath('./userRecord/wireless_state/text()').to_s
       }
+
+      data
+    end
+
+    def parse_list_users_results( node )
+      # <tns:listusersResponse>
+      #   <user>
+      #      <active>0</active>
+      #      <address>sales@jumboinc.com</address>
+      #      <create_method>3</create_method>
+      #      <orgtag>Sales</orgtag>
+      #      <timezone>Europe/Lisbon</timezone>
+      #   </user>
+      #   <user>
+      #     ...
+      #   </user
+      # </tns:listusersResponse>
+
+      data = {}
+
+      node.xpath('./user').each do |user|
+
+        address = user.xpath('./address/text()').to_s
+        fields = {}
+
+        user.children.each do |field|
+          next if field.name == 'address'
+
+          fields[ field.name.to_sym ] = field.content
+        end
+
+        data[ address ] = fields
+      end
 
       data
     end
