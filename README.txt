@@ -13,7 +13,7 @@ Rubyisms.
 
 == FEATURES/PROBLEMS:
 
-* Built on top of handsoap[http://github.com/troelskn/handsoap], to
+* Built on top of handsoap[http://github.com/unwire/handsoap], to
   provide a lite hash-based interface to an otherwise crap API.
 
 == SYNOPSIS:
@@ -29,12 +29,15 @@ Rubyisms.
 
 * Approved access to the Postini Early Access Program (contact your Postini
   provider)
-* handsoap[http://github.com/troelskn/handsoap]
+* handsoap[http://github.com/unwire/handsoap]
+* nokogiri[http://nokogiri.org]
+* curb[http://github.com/taf2/curb]
 
 == INSTALL:
 
-* sudo gem install troelskn-handsoap --source http://gems.github.com
-* sudo gem install postini
+The postini gem is available on Gemcutter[http://gemcutter.org]
+
+* gem install postini
 
 == TRADEMARKS:
 

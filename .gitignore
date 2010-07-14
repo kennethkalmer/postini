@@ -2,3 +2,4 @@ nbproject
 pkg
 doc
 vendor/troelskn-handsoap-*
+*.swp

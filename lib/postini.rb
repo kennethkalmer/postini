@@ -3,6 +3,8 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 # requirements
 require 'rubygems'
+require 'curb'
+require 'nokogiri'
 require 'handsoap'
 
 require 'postini/exceptions'
@@ -76,7 +78,7 @@ require 'postini/exceptions'
 # degrees, and allow you to access some soap4r internals as well.
 #
 module Postini
-  VERSION = "0.1.1"
+  VERSION = "0.2.0pre"
 
   autoload :ConfigurationCheck,      "postini/configuration_check"
   autoload :Endpoints,               "postini/endpoints"
@@ -92,9 +94,9 @@ module Postini
 
     def configured? #:nodoc:
       !self.api_key.nil? &&
-        !self.system_number.nil? &&
-        !self.username.nil? &&
-        !self.password.nil?
+      !self.system_number.nil? &&
+      !self.username.nil? &&
+      !self.password.nil?
     end
 
     # Configure the library from yaml configuration file or

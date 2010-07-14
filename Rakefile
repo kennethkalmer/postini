@@ -1,29 +1,28 @@
-require 'rubygems' unless ENV['NO_RUBYGEMS']
-%w[rake rake/clean fileutils newgem rubigen].each { |f| require f }
 require File.dirname(__FILE__) + '/lib/postini'
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('postini', Postini::VERSION) do |p|
-  p.developer('Kenneth Kalmer', 'kenneth.kalmer@gmail.com')
-  p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-  p.post_install_message = 'PostInstall.txt' # TODO remove if post-install message not required
-  p.rubyforge_name       = 'postini4r' # TODO this is default value
-  # p.extra_deps         = [
-  #   ['activesupport','>= 2.0.2'],
-  # ]
-  p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"]
-  ]
-  
-  p.clean_globs |= %w[**/.DS_Store tmp *.log]
-  path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
-  p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
-  p.rsync_args = '-av --delete --ignore-errors'
-end
-
-require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-# TODO - want other tests/tasks run by default? Add them to the list
-# task :default => [:spec, :features]
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gemspec|
+    gemspec.name = 'postini'
+    gemspec.version = Postini::VERSION
+    gemspec.summary = 'Library to make the Postini SOAP API more palatable'
+    gemspec.description = 'Library to make the Postini SOAP API more palatable'
+    gemspec.email = 'kenneth.kalmer@gmail.com'
+    gemspec.homepage = 'http://postini4r.rubyforge.org'
+    gemspec.authors = ['kenneth.kalmer@gmail.com']
+    gemspec.post_install_message = IO.read('PostInstall.txt')
+    gemspec.extra_rdoc_files.include '*.txt'
+
+    gemspec.add_dependency 'handsoap'
+    gemspec.add_dependency 'curb'
+    gemspec.add_dependency 'nokogiri'
+    gemspec.add_development_dependency 'rspec'
+    gemspec.add_development_dependency 'cucumber'
+  end
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler not available. Install it with 'gem install jeweler'"
+end
+
