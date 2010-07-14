@@ -3,3 +3,5 @@ pkg
 doc
 vendor/troelskn-handsoap-*
 *.swp
+.yardoc
+pkg
