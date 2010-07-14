@@ -202,6 +202,46 @@ module Postini
     end
     requires_configured :display_user
 
+    # Return a list of orgs, possibly filtered and sorted. Refer to the Postini
+    # Automated Batch Service Manual for an explanation of each field.
+    #
+    # Possible options are:
+    #
+    # :targetOrg => string
+    # :childorgs => boolean
+    # :sort => string
+    # :fields => array (strings)
+    # :start => integer
+    # :end => integer
+    #
+    # Postini will return a maximum of 15,000 results
+    def list_orgs( query_string = 'ALL', options = {} )
+      valid_options = {}
+
+      # vanilla copes
+      [ :targetOrg, :sort, :start, :end ].each do |k|
+        valid_options[k] = options[k] if options.has_key?(k)
+      end
+
+      # boolean copies
+      valid_options[:childorgs] = ( options[:childorgs] ? '1' : '0' ) if options.has_key?(:childorgs)
+
+      valid_options[:fields] = options[:fields].join('|') if options.has_key?(:fields)
+
+      response = invoke("aut:listorgs") do |message|
+        build_auth!( message )
+        message.add('queryString', query_string)
+        message.add('queryParams') do |q|
+          valid_options.each do |k,v|
+            q.add( k.to_s, v )
+          end
+        end
+      end
+
+      parse_list_orgs_results( response.document.xpath('//tns:listorgsResponse', tns).first )
+    end
+    requires_configured :list_orgs
+
     # Return a list of users, possibly filtered and sorted. Refer to
     # the Postini Automated Batch Service Manual for an explanation of
     # each field.
@@ -514,6 +554,94 @@ module Postini
       data
     end
 
+    def parse_list_orgs_results( node )
+      # <tns:listorgsResponse>
+      #   <org>
+      #     <approved_senders>
+      #     <archive>
+      #     <async_bounce>
+      #     <at_notify_on>
+      #     <authentication_data>
+      #     <authentication_type>
+      #     <autocreate_smtp>
+      #     <autocreate_web>
+      #     <blatant_spam>
+      #     <blocked_senders>
+      #     <bounce_fragments>
+      #     <company_name>
+      #     <create_method>
+      #     <created_date>
+      #     <creator>
+      #     <default_message_limit>
+      #     <default_user>
+      #     <disable_first_spam>
+      #     <disposition_virus>
+      #     <ext_encrypt>
+      #     <footer_on>
+      #     <iid>
+      #     <im_enable>
+      #     <im_external_enable>
+      #     <im_proto_enable>
+      #     <is_email_config>
+      #     <lang_locale>
+      #     <lastmod_date>
+      #     <max_message_size>
+      #     <ndr>
+      #     <non_account_bounce>
+      #     <non_account_virus_scan>
+      #     <orgname>
+      #     <out_at_notify_on>
+      #     <outbound_max_message_size>
+      #     <outbound_virus>
+      #     <outbound_virus_disposition>
+      #     <parent_org>
+      #     <qsum_actionable>
+      #     <qsum_enable>
+      #     <qtine_redir_atq>
+      #     <qtine_redir_ndr>
+      #     <qtine_redir_out_atq>
+      #     <qtine_redir_out_virus>
+      #     <qtine_redir_spam>
+      #     <qtine_redir_virus>
+      #     <quarantine_links>
+      #     <remotecmd_secret>
+      #     <spam_notify_on>
+      #     <support_contact>
+      #     <tagonly_spam>
+      #     <timezone>
+      #     <tls_notify_admin>
+      #     <tls_notify_on>
+      #     <virus_clean>
+      #     <virus_notify>
+      #     <welcome_on>
+      #     <zero_hour_notify_on>
+      #     <zero_hour_scan>
+      #     <zero_hour_waiver>
+      #   </org>
+      #   <org>
+      #     ...
+      #   </org>
+      # </tns:listusersResponse>
+
+      data = {}
+
+      node.xpath('./org').each do |org|
+
+        name = org.xpath('./orgname/text()').to_s
+        fields = {}
+
+        org.children.each do |field|
+          next if field.node_name == 'orgname'
+
+          fields[ field.node_name.to_sym ] = field.to_s
+        end
+
+        data[ name ] = fields
+      end
+
+      data
+    end
+
     def parse_list_users_results( node )
       # <tns:listusersResponse>
       #   <user>
@@ -525,7 +653,7 @@ module Postini
       #   </user>
       #   <user>
       #     ...
-      #   </user
+      #   </user>
       # </tns:listusersResponse>
 
       data = {}
@@ -536,9 +664,9 @@ module Postini
         fields = {}
 
         user.children.each do |field|
-          next if field.name == 'address'
+          next if field.node_name == 'address'
 
-          fields[ field.name.to_sym ] = field.content
+          fields[ field.node_name.to_sym ] = field.to_s
         end
 
         data[ address ] = fields
