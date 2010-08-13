@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["kenneth.kalmer@gmail.com"]
-  s.date = %q{2010-07-14}
+  s.date = %q{2010-08-13}
   s.description = %q{Library to make the Postini SOAP API more palatable}
   s.email = %q{kenneth.kalmer@gmail.com}
   s.extra_rdoc_files = [
@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
      "lib/postini/endpoint_resolver_service.rb",
      "lib/postini/endpoints.rb",
      "lib/postini/exceptions.rb",
-     "postini4r-postini.gemspec",
+     "postini.gemspec",
      "script/console",
      "script/destroy",
      "script/generate",
