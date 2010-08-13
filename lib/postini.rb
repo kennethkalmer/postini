@@ -116,6 +116,9 @@ module Postini
       data.each do |k,v|
         self.send( "#{k}=", v )
       end
+
+      # Cope with trans-continental links
+      Handsoap.timeout = 300
     end
   end
 end
