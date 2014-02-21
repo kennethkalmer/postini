@@ -14,12 +14,7 @@ begin
     gemspec.authors = ['kenneth.kalmer@gmail.com']
     gemspec.post_install_message = IO.read('PostInstall.txt')
     gemspec.extra_rdoc_files.include '*.txt'
-
-    gemspec.add_dependency 'handsoap'
-    gemspec.add_dependency 'curb'
-    gemspec.add_dependency 'nokogiri'
-    gemspec.add_development_dependency 'rspec'
-    gemspec.add_development_dependency 'cucumber'
+  # dependencies defined in Gemfile
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
