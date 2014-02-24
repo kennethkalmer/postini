@@ -74,7 +74,7 @@ require 'postini/exceptions'
 # degrees, and allow you to access some soap4r internals as well.
 #
 module Postini
-  VERSION = "0.2.0pre"
+  VERSION = "0.2.0"
 
   autoload :ConfigurationCheck,      "postini/configuration_check"
   autoload :Endpoints,               "postini/endpoints"
